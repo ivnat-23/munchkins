@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munchkins Delights - Organic Baby Food</title>
+    
+    <meta name="description" content="Delicious and nutritious organic baby food, delivered to your door. Shop our range of purees, snacks, and cereals for your little one.">
+    <meta name="keywords" content="baby food, organic, purees, baby snacks, infant nutrition, ecommerce">
+    <meta property="og:title" content="Munchkins Delights - Organic Baby Food">
+    <meta property="og:description" content="Nourishing the next generation with the best organic ingredients.">
+    <meta property="og:image" content="https://placehold.co/1200x630/FFF0F5/FF69B4?text=Munchkins Delights">
+    <meta property="og:url" content="#">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍼</text></svg>">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[var(--color-background)] text-[var(--color-text)] antialiased">
+
+    <header id="header" class="bg-[var(--color-card-bg)]/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm relative">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex-shrink-0">
+                <a href="#" class="text-2xl font-bold text-[var(--color-primary)] flex items-center" onclick="app.navigateTo('home')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-baby mr-2"><path d="M9 12h.01"/><path d="M15 12h.01"/><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.8.6 5.3 1.7L19 6.3z"/></svg>
+                    Munchkins Delights
+                </a>
+            </div>
+
+            <div class="hidden md:flex flex-grow items-center justify-center">
+                <div id="nav-links" class="flex items-center space-x-6 text-lg font-medium">
+                    <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="home" onclick="app.navigateTo('home')">Home</a>
+                    <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="shop" onclick="app.navigateTo('shop')">Shop</a>
+                    <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="about" onclick="app.navigateTo('about')">About Us</a>
+                    <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="blog" onclick="app.navigateTo('blog')">Blog</a>
+                    <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="contact" onclick="app.navigateTo('contact')">Contact</a>
+                </div>
+                <div id="search-bar-container" class="hidden w-full max-w-sm">
+                    <form id="nav-search-form" class="relative">
+                        <input type="search" id="nav-search-input" placeholder="Search products..." class="w-full py-2 pl-10 pr-4 rounded-full bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)] transition">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+                    </form>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <button id="desktop-search-toggle" class="p-2 rounded-full hover:bg-[var(--color-primary)]/10 dark:hover:bg-white/10 flex">
+                    <i data-lucide="search"></i>
+                </button>
+                <button class="p-2 rounded-full hover:bg-[var(--color-primary)]/10 dark:hover:bg-white/10 hidden md:inline-flex" onclick="app.navigateTo('profile')">
+                    <i data-lucide="user"></i>
+                </button>
+                <div class="relative hidden md:block">
+                    <button class="p-2 rounded-full hover:bg-[var(--color-primary)]/10 dark:hover:bg-white/10" onclick="app.navigateTo('cart')">
+                        <i data-lucide="shopping-cart"></i>
+                        <span id="cart-counter" class="absolute -top-1 -right-1 bg-[var(--color-primary)] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-[var(--color-primary)]/10 dark:hover:bg-white/10 hidden md:inline-flex">
+                    <i data-lucide="sun" class="dark:hidden"></i>
+                    <i data-lucide="moon" class="hidden dark:block"></i>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-full hover:bg-[var(--color-primary)]/10 dark:hover:bg-white/10">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Mobile Search Container -->
+        <div id="mobile-search-container" class="md:hidden hidden px-6 pb-3">
+            <form id="mobile-nav-search-form" class="relative bg-[var(--color-card-bg)] border border-[var(--color-primary)]/10 rounded-xl p-2 shadow-sm">
+                <input type="search" id="mobile-nav-search-input" placeholder="Search products..." class="w-full py-2 pl-10 pr-4 rounded-full bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)] transition">
+                <i data-lucide="search" class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"></i>
+            </form>
+        </div>
+        
+        <div id="mobile-menu" class="hidden md:hidden bg-[var(--color-card-bg)] absolute top-full left-0 right-0 z-40 shadow-lg border-t border-[var(--color-primary)]/10">
+            <div class="py-2">
+                <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('home')">Home</a>
+                <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop')">Shop</a>
+                <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('about')">About Us</a>
+                <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('blog')">Blog</a>
+                <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('contact')">Contact</a>
+            </div>
+            <div class="border-t border-[var(--color-primary)]/10">
+                <a href="#" class="flex items-center gap-3 py-3 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('profile')">
+                    <i data-lucide="user"></i> <span>Profile</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 py-3 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('cart')">
+                    <span class="relative inline-flex items-center">
+                        <i data-lucide="shopping-cart"></i>
+                        <span id="cart-counter-mobile" class="ml-2 inline-flex items-center justify-center text-xs font-semibold bg-[var(--color-primary)] text-white rounded-full px-1.5 min-w-[1.25rem]">0</span>
+                    </span>
+                    <span class="ml-1">Cart</span>
+                </a>
+                <button id="theme-toggle-mobile" class="w-full flex items-center justify-between py-3 px-4 text-sm hover:bg-[var(--color-primary)]/10">
+                    <span class="inline-flex items-center gap-3"><i data-lucide="moon"></i> <span>Dark Mode</span></span>
+                    <span class="inline-flex h-5 w-9 items-center rounded-full bg-gray-300 dark:bg-gray-600 relative">
+                        <span class="h-4 w-4 bg-white rounded-full transform translate-x-1 dark:translate-x-4 transition-transform"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content" class="container mx-auto px-6 py-8">
+        <div id="page-container">
+            </div>
+    </main>
+
+    <footer class="relative mt-16 overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute -top-20 -left-10 w-64 h-64 rounded-full bg-[var(--color-primary)]/18 blur-3xl animate-gradient-shift"></div>
+            <div class="absolute -bottom-24 -right-10 w-72 h-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl animate-gradient-shift" style="animation-delay:1.5s"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-primary)]/16 via-transparent to-[var(--color-primary)]/10 dark:from-[var(--color-primary)]/14 dark:via-transparent dark:to-[var(--color-primary)]/10"></div>
+        </div>
+        <div class="absolute top-0 left-0 w-full h-1 overflow-hidden">
+            <div class="h-full w-1/3 bg-gradient-to-r from-transparent via-[var(--color-primary)] to-transparent animate-gradient-slide"></div>
+        </div>
+        <div class="container mx-auto px-6 py-10 md:py-14">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-[var(--color-primary)] mb-3">Munchkins Delights</h3>
+                    <p class="text-sm opacity-90">Nourishing the next generation with love and the best organic ingredients.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="app.navigateTo('about')" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>About Us</a></li>
+                        <li><a href="#" onclick="app.navigateTo('contact')" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>Contact</a></li>
+                        <li><a href="#" onclick="app.navigateTo('blog')" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>Blog</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>FAQs</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-[var(--color-primary)] transition-transform transform hover:scale-110"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="hover:text-[var(--color-primary)] transition-transform transform hover:scale-110"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="hover:text-[var(--color-primary)] transition-transform transform hover:scale-110"><i data-lucide="facebook"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Newsletter</h4>
+                    <p class="text-sm mb-2 opacity-90">Get yummy updates and special offers!</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="w-full px-4 py-2 rounded-l-lg border border-[var(--color-primary)]/20 bg-[var(--color-card-bg)] focus:ring-2 focus:ring-[var(--color-primary)]/40">
+                        <button class="bg-[var(--color-primary)] p-3 rounded-r-lg text-white hover:opacity-90 transition-transform transform hover:scale-105">
+                            <i data-lucide="send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center text-sm mt-12 border-t border-[var(--color-primary)]/20 pt-8">
+                &copy; 2025 Munchkins Delights. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <template id="home-template">
+        <div class="space-y-16">
+            <section class="rounded-3xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-primary)]/30 p-6 md:p-16 text-center md:text-left flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h1 class="text-3xl md:text-6xl font-bold mb-3 md:mb-4 leading-tight">Pure Goodness,<br> One Spoonful at a Time.</h1>
+                    <p class="text-base md:text-lg mb-6 md:mb-8">Organic, delicious, and lovingly made for your little one's happy tummy.</p>
+                    <button class="bg-[var(--color-primary)] text-white px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 transition-transform hover:scale-105" onclick="app.navigateTo('shop')">Shop Now</button>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="header-img.png" alt="Happy baby eating" class="rounded-3xl shadow-lg w-full max-w-sm md:max-w-full">
+                </div>
+            </section>
+
+            <section class="relative">
+                <div class="rounded-full border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 py-3 px-2 overflow-hidden">
+                    <div class="marquee flex items-center">
+                        <div class="marquee-track flex items-center gap-6 text-sm md:text-base font-semibold tracking-wide uppercase text-[var(--color-text)]">
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Fresh Ingredients</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Clean Whole Food</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">No Preservatives</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">100% Sustainably Sourced</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Fresh Ingredients</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Clean Whole Food</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">No Preservatives</span>
+                    </div>
+                        <div class="marquee-track flex items-center gap-6 text-sm md:text-base font-semibold tracking-wide uppercase text-[var(--color-text)]" aria-hidden="true">
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Fresh Ingredients</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Clean Whole Food</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">No Preservatives</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">100% Sustainably Sourced</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Fresh Ingredients</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Clean Whole Food</span>
+                            <span class="opacity-50">|</span>
+                            <span class="px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">No Preservatives</span>
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-6">Our Products</h2>
+                <div class="flex flex-wrap gap-2 md:gap-3 justify-center mb-6 md:mb-10">
+                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Bestseller' })">Bestseller</button>
+                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Pancake Mix' })">Pancake Mix</button>
+                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Instant Mixes' })">Instant Mixes</button>
+                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Cookies' })">Cookies</button>
+                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Puffs' })">Puffs</button>
+                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Grab & Go' })">Grab & Go (Travel Pack)</button>
+                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Milk Mix' })">Milk Mix</button>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Our Products</h2>
+                <div id="home-products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+                    </div>
+            </section>
+            
+            <section class="relative rounded-3xl overflow-hidden">
+                <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-primary)]/10 via-transparent to-[var(--color-primary)]/10"></div>
+                <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-center p-6 md:p-12">
+                    <div>
+                        <h2 class="text-2xl md:text-5xl font-extrabold leading-tight mb-2 md:mb-4">Real Food. Real Smiles.</h2>
+                        <p class="text-sm md:text-base opacity-90 mb-4 md:mb-6 max-w-xl">Thoughtfully crafted meals and snacks that make every bite nourishing, safe, and joyful for your little one.</p>
+                        <div class="flex flex-wrap gap-2 md:gap-3">
+                            <span class="px-2.5 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs md:text-sm">Certified Clean</span>
+                            <span class="px-2.5 py-1 rounded-full bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] text-xs md:text-sm">Pediatrician Approved</span>
+                            <span class="px-2.5 py-1 rounded-full bg-[var(--color-accent)]/40 text-[var(--color-text)] text-xs md:text-sm">Farm-to-Spoon</span>
+                        </div>
+                    </div>
+                    <div class="grid sm:grid-cols-2 gap-4 md:gap-6">
+                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
+                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
+                                <i data-lucide="leaf"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">100% Natural</h3>
+                            <p class="text-xs md:text-sm opacity-80">No additives, no nasties—only whole, clean ingredients.</p>
+                        </div>
+                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
+                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
+                                <i data-lucide="chef-hat"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">Chef-Crafted</h3>
+                            <p class="text-xs md:text-sm opacity-80">Developed with pediatric nutritionists for balanced nutrition.</p>
+                        </div>
+                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
+                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
+                                <i data-lucide="recycle"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">Sustainably Sourced</h3>
+                            <p class="text-xs md:text-sm opacity-80">Responsible sourcing and recyclable packaging.</p>
+                        </div>
+                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
+                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
+                                <i data-lucide="truck"></i>
+                            </div>
+                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">Freshly Delivered</h3>
+                            <p class="text-xs md:text-sm opacity-80">Packed with care and delivered on time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-3 md:gap-4 text-center px-4 md:px-6 pb-6 md:pb-8">
+                    <div class="rounded-2xl p-3 md:p-4 bg-[var(--color-card-bg)]/60 border border-[var(--color-primary)]/10 hover-lift"><p class="text-2xl md:text-3xl font-extrabold text-[var(--color-primary)]">50k+</p><p class="text-[10px] md:text-xs uppercase opacity-70">Happy Parents</p></div>
+                    <div class="rounded-2xl p-3 md:p-4 bg-[var(--color-card-bg)]/60 border border-[var(--color-primary)]/10 hover-lift"><p class="text-2xl md:text-3xl font-extrabold text-[var(--color-primary)]">1M+</p><p class="text-[10px] md:text-xs uppercase opacity-70">Meals Served</p></div>
+                    <div class="rounded-2xl p-3 md:p-4 bg-[var(--color-card-bg)]/60 border border-[var(--color-primary)]/10 hover-lift"><p class="text-2xl md:text-3xl font-extrabold text-[var(--color-primary)]">4.9★</p><p class="text-[10px] md:text-xs uppercase opacity-70">Avg. Rating</p></div>
+                </div>
+            </section>
+
+            
+            
+            <section class="relative rounded-3xl p-6 md:p-10 bg-[var(--color-card-bg)] border border-[var(--color-primary)]/10 overflow-hidden">
+                <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+                    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl"></div>
+                    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[var(--color-secondary)]/10 blur-3xl"></div>
+                </div>
+
+                <div class="text-center relative z-10 mb-6 md:mb-8">
+                    <h2 class="text-3xl md:text-4xl font-extrabold">Loved by Parents Everywhere</h2>
+                    <p class="text-sm md:text-base opacity-80 mt-2">Real stories from our community</p>
+                </div>
+
+                <div class="relative z-10">
+                    <div id="testimonials-carousel" class="overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none -mx-2 px-2 select-none" tabindex="0" aria-roledescription="carousel" aria-label="Testimonials">
+                        <div id="testimonials-track" class="flex gap-4 md:gap-6 items-stretch">
+                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <img src="https://placehold.co/64x64/B0E0E6/3D3B40?text=S" alt="Sarah J avatar" class="w-12 h-12 rounded-full">
+                                    <div>
+                                        <p class="font-semibold">Sarah J.</p>
+                                        <p class="text-xs text-gray-500">Mom of Leo</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm md:text-base">“My picky eater absolutely loves the Apple & Spinach puree! It's a relief to find healthy food he enjoys.”</p>
+                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
+                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                                </div>
+                            </article>
+                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <img src="https://placehold.co/64x64/FFC0CB/3D3B40?text=M" alt="Mike R avatar" class="w-12 h-12 rounded-full">
+                                    <div>
+                                        <p class="font-semibold">Mike R.</p>
+                                        <p class="text-xs text-gray-500">Dad of Chloe</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm md:text-base">“The quality is fantastic and the delivery is always on time. Munchkins Delights is a lifesaver for busy parents.”</p>
+                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
+                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                                </div>
+                            </article>
+                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <img src="https://placehold.co/64x64/98FB98/3D3B40?text=E" alt="Emily T avatar" class="w-12 h-12 rounded-full">
+                                    <div>
+                                        <p class="font-semibold">Emily T.</p>
+                                        <p class="text-xs text-gray-500">Mom of twins</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm md:text-base">“I trust Munchkins Delights completely. The ingredients are clean and my baby is thriving. Highly recommend!”</p>
+                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
+                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                                </div>
+                            </article>
+                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <img src="https://placehold.co/64x64/FDE68A/3D3B40?text=A" alt="Ava K avatar" class="w-12 h-12 rounded-full">
+                                    <div>
+                                        <p class="font-semibold">Ava K.</p>
+                                        <p class="text-xs text-gray-500">Mom of Max</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm md:text-base">“We love the flavors and the transparency. Our toddler asks for Munchkins Delights by name!”</p>
+                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
+                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="relative mt-4 flex items-center justify-center gap-3">
+                        <button id="testimonials-prev-ovl" class="p-2 md:p-3 rounded-full bg-[var(--color-card-bg)]/80 backdrop-blur border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10 shadow-sm" aria-label="Previous testimonial"><i data-lucide="chevron-left"></i></button>
+                        <div id="testimonials-dots" class="flex items-center gap-2"></div>
+                        <button id="testimonials-next-ovl" class="p-2 md:p-3 rounded-full bg-[var(--color-card-bg)]/80 backdrop-blur border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10 shadow-sm" aria-label="Next testimonial"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </template>
+    
+    <template id="shop-template">
+        <div class="flex flex-col md:flex-row gap-8">
+            <aside class="md:w-1/4">
+                <h2 class="text-2xl font-bold mb-6">Filters</h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="font-semibold mb-2">Age Group</h3>
+                        <select id="age-filter" class="w-full p-2 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]/60">
+                            <option value="all">All Ages</option>
+                            <option value="6m+">6m+</option>
+                            <option value="8m+">8m+</option>
+                            <option value="12m+">12m+</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Category</h3>
+                        <select id="category-filter" class="w-full p-2 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]/60">
+                            <option value="all">All Categories</option>
+                            <option value="Purees">Purees</option>
+                            <option value="Snacks">Snacks</option>
+                            <option value="Cereals">Cereals</option>
+                            <option value="Drinks">Drinks</option>
+                        </select>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold mb-2">Price Range</h3>
+                        <input type="range" id="price-filter" min="0" max="10" value="10" class="w-full">
+                        <span class="text-sm">Up to $<span id="price-value">10</span></span>
+                    </div>
+                     <div class="relative">
+                        <h3 class="font-semibold mb-2">Search</h3>
+                        <input type="text" id="search-bar" placeholder="Search for products..." class="w-full p-2 pl-10 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]/60">
+                        <i data-lucide="search" class="absolute left-3 top-10 w-5 h-5 text-gray-400"></i>
+                    </div>
+                    <button id="reset-filters-btn" class="w-full bg-[var(--color-secondary)] text-white py-2 rounded-lg font-semibold hover:opacity-90">Reset Filters</button>
+                </div>
+            </aside>
+            <main class="md:w-3/4">
+                <h1 class="text-4xl font-bold mb-6">Our Products</h1>
+                <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+                    </div>
+                 <div id="no-products-message" class="hidden text-center py-16">
+                    <p class="text-xl">No products found matching your criteria. 😢</p>
+                </div>
+            </main>
+        </div>
+    </template>
+
+    <template id="product-detail-template">
+        <div class="flex flex-col lg:flex-row gap-12">
+            <div class="lg:w-1/2">
+                <img id="product-image" src="" alt="Product Image" class="w-full rounded-2xl shadow-lg mb-4">
+                 </div>
+            <div class="lg:w-1/2">
+                <h1 id="product-name" class="text-4xl font-bold mb-4"></h1>
+                <p id="product-price" class="text-3xl text-[var(--color-primary)] font-semibold mb-6"></p>
+                <p id="product-description" class="mb-6"></p>
+                <div class="flex items-center gap-4 mb-8">
+                    <div class="flex items-center border rounded-lg">
+                        <button class="px-4 py-2" onclick="this.nextElementSibling.stepDown()">-</button>
+                        <input id="product-quantity" type="number" value="1" min="1" class="w-16 text-center border-none bg-transparent focus:ring-0">
+                        <button class="px-4 py-2" onclick="this.previousElementSibling.stepUp()">+</button>
+                    </div>
+                    <button id="add-to-cart-btn" class="bg-[var(--color-primary)] text-white flex-grow py-3 px-6 rounded-lg font-bold text-lg hover:opacity-90 transition-transform hover:scale-105 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[var(--color-primary)]/60">
+                        <i data-lucide="shopping-cart" class="w-5 h-5"></i> Add to Cart
+                    </button>
+                </div>
+
+                <div>
+                    <details class="border-b pb-2 mb-2">
+                        <summary class="font-semibold cursor-pointer">Nutritional Information</summary>
+                        <div id="product-nutrition" class="text-sm p-4 rounded-lg mt-2 bg-[var(--color-background)]/60 text-[var(--color-text)] border border-[var(--color-primary)]/10"></div>
+                    </details>
+                    <details class="border-b pb-2 mb-2">
+                        <summary class="font-semibold cursor-pointer">Ingredients</summary>
+                         <div id="product-ingredients" class="text-sm p-4 rounded-lg mt-2 bg-[var(--color-background)]/60 text-[var(--color-text)] border border-[var(--color-primary)]/10"></div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <template id="cart-template">
+        <h1 class="text-4xl font-bold mb-8">Your Cart</h1>
+        <div id="cart-container" class="flex flex-col lg:flex-row gap-8">
+            </div>
+    </template>
+    
+    <template id="about-template">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold mb-4">Our Story</h1>
+            <p class="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">From our kitchen to yours, with love.</p>
+        </div>
+        <div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
+             <div class="order-2 md:order-1">
+                <h2 class="text-3xl font-bold mb-4">How It Started</h2>
+                <p class="mb-4">Munchkins Delights was born from a simple desire: to provide our own children with the most nutritious, delicious, and pure food possible. As new parents, we found ourselves navigating the confusing world of baby food, often disappointed by the long ingredient lists and hidden sugars in store-bought options.</p>
+                <p>So, we started making our own. We spent countless hours in our home kitchen, steaming, blending, and tasting, using only fresh, organic fruits and vegetables. The result? Happy, healthy babies with very yummy tummies. We knew we had to share this goodness with other families, and Munchkins Delights was born.</p>
+            </div>
+            <div class="order-1 md:order-2">
+                <img src="https://placehold.co/600x400/FFFFE0/3D3B40?text=Our+Kitchen" class="rounded-2xl shadow-lg">
+            </div>
+        </div>
+         <div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <img src="https://placehold.co/600x400/98FB98/3D3B40?text=Healthy+Food" class="rounded-2xl shadow-lg">
+            </div>
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Our Promise</h2>
+                <ul class="space-y-4 list-disc list-inside">
+                    <li><strong>100% Organic:</strong> We only use certified organic ingredients, free from pesticides and GMOs.</li>
+                    <li><strong>No Nasties:</strong> Absolutely no added sugars, salts, preservatives, or artificial flavors. Just pure goodness.</li>
+                    <li><strong>Chef-Crafted Recipes:</strong> Developed with pediatric nutritionists to ensure every bite is packed with essential nutrients.</li>
+                    <li><strong>Sustainable & Kind:</strong> We use recyclable packaging and partner with local farms whenever possible.</li>
+                </ul>
+            </div>
+        </div>
+    </template>
+    
+    <template id="blog-template">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold mb-4">The Munchkins Delights Blog</h1>
+            <p class="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">Tips, tricks, and tasty tales for modern parents.</p>
+        </div>
+        <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-[var(--color-card-bg)] rounded-2xl shadow-md overflow-hidden group">
+                <img src="https://placehold.co/400x250/B0E0E6/3D3B40?text=Nutrition+Tips" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
+                <div class="p-6">
+                    <p class="text-sm text-gray-500 mb-2">Nutrition</p>
+                    <h3 class="text-xl font-bold mb-4">Introducing Solids: A Beginner's Guide</h3>
+                    <p class="text-sm mb-4">Feeling overwhelmed? Here's our simple guide to starting your baby's food journey.</p>
+                    <a href="#" class="font-semibold text-[var(--color-primary)] hover:underline">Read More &rarr;</a>
+                </div>
+            </div>
+             <div class="bg-[var(--color-card-bg)] rounded-2xl shadow-md overflow-hidden group">
+                <img src="https://placehold.co/400x250/FFC0CB/3D3B40?text=Parenting+Hacks" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
+                <div class="p-6">
+                    <p class="text-sm text-gray-500 mb-2">Parenting</p>
+                    <h3 class="text-xl font-bold mb-4">5 Mealtime Hacks for Picky Eaters</h3>
+                    <p class="text-sm mb-4">Turn stressful meals into fun family time with these tried-and-true tips from fellow parents.</p>
+                    <a href="#" class="font-semibold text-[var(--color-primary)] hover:underline">Read More &rarr;</a>
+                </div>
+            </div>
+             <div class="bg-[var(--color-card-bg)] rounded-2xl shadow-md overflow-hidden group">
+                <img src="https://placehold.co/400x250/98FB98/3D3B40?text=Recipes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
+                <div class="p-6">
+                    <p class="text-sm text-gray-500 mb-2">DIY Recipes</p>
+                    <h3 class="text-xl font-bold mb-4">DIY Baby Snacks: Healthy & Easy</h3>
+                    <p class="text-sm mb-4">Want to try making your own? Here are three simple recipes you can whip up in minutes.</p>
+                    <a href="#" class="font-semibold text-[var(--color-primary)] hover:underline">Read More &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <template id="contact-template">
+         <div class="text-center">
+            <h1 class="text-5xl font-bold mb-4">Get In Touch</h1>
+            <p class="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">We'd love to hear from you! Send us a message and we'll get back to you.</p>
+        </div>
+        <div class="mt-16 grid md:grid-cols-2 gap-12">
+            <form class="space-y-6">
+                <div>
+                    <label for="name" class="block font-semibold mb-1">Name</label>
+                    <input type="text" id="name" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]">
+                </div>
+                 <div>
+                    <label for="email" class="block font-semibold mb-1">Email</label>
+                    <input type="email" id="email" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]">
+                </div>
+                 <div>
+                    <label for="message" class="block font-semibold mb-1">Message</label>
+                    <textarea id="message" rows="5" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-[var(--color-primary)] text-white py-3 rounded-lg font-bold text-lg hover:bg-opacity-80">Send Message</button>
+            </form>
+            <div class="bg-[var(--color-secondary)]/30 p-8 rounded-2xl">
+                 <h3 class="text-2xl font-bold mb-4">Contact Info</h3>
+                 <ul class="space-y-4">
+                      <li class="flex items-center gap-4"><i data-lucide="mail"></i> hello@Munchkins Delights.com</li>
+                      <li class="flex items-center gap-4"><i data-lucide="phone"></i> (123) 456-7890</li>
+                      <li class="flex items-center gap-4"><i data-lucide="map-pin"></i> 123 Yum Street, Foodie Town, USA</li>
+                 </ul>
+                 <div class="mt-8 h-64 bg-gray-300 rounded-lg">
+                    <p class="text-center pt-24 text-gray-500">Map would go here</p>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <template id="checkout-template">
+        <h1 class="text-4xl font-bold mb-8">Checkout</h1>
+        <div class="flex flex-col lg:flex-row gap-12">
+            <div class="lg:w-2/3">
+                <form class="space-y-6">
+                    <h2 class="text-2xl font-semibold">Shipping Information</h2>
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="fname" class="block font-semibold mb-1">First Name</label>
+                            <input type="text" id="fname" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                        </div>
+                        <div>
+                            <label for="lname" class="block font-semibold mb-1">Last Name</label>
+                            <input type="text" id="lname" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="address" class="block font-semibold mb-1">Address</label>
+                        <input type="text" id="address" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                    </div>
+                     <div class="grid sm:grid-cols-3 gap-4">
+                        <div>
+                            <label for="city" class="block font-semibold mb-1">City</label>
+                            <input type="text" id="city" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                        </div>
+                        <div>
+                            <label for="state" class="block font-semibold mb-1">State</label>
+                            <input type="text" id="state" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                        </div>
+                        <div>
+                            <label for="zip" class="block font-semibold mb-1">Zip Code</label>
+                            <input type="text" id="zip" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                        </div>
+                    </div>
+                    
+                    <h2 class="text-2xl font-semibold pt-6">Payment Method</h2>
+                     <div class="space-y-3 bg-[var(--color-card-bg)] p-6 rounded-xl border border-[var(--color-primary)]/10">
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-[var(--color-primary)]/20">
+                            <input type="radio" name="payment" value="cod" checked>
+                            <span class="font-semibold">Cash on Delivery (COD)</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-[var(--color-primary)]/10 opacity-50 cursor-not-allowed">
+                            <input type="radio" name="payment" value="card" disabled>
+                            <span>Credit/Debit Card (Currently unavailable)</span>
+                        </label>
+                        <label class="flex items-center gap-3 p-3 rounded-lg border border-[var(--color-primary)]/10 opacity-50 cursor-not-allowed">
+                            <input type="radio" name="payment" value="paypal" disabled>
+                            <span>PayPal (Currently unavailable)</span>
+                        </label>
+                     </div>
+                </form>
+            </div>
+            <div id="checkout-summary" class="lg:w-1/3">
+                </div>
+        </div>
+    </template>
+    
+    <template id="profile-template">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <aside class="lg:col-span-1 space-y-6">
+                <div class="bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-sm border border-[var(--color-primary)]/10">
+                    <div class="flex items-center gap-4">
+                        <img id="profile-avatar" src="https://placehold.co/96x96/FFC0CB/3D3B40?text=YOU" class="w-24 h-24 rounded-full object-cover">
+                        <div>
+                            <h2 id="profile-name" class="text-2xl font-bold">Akash Patil</h2>
+                            <p id="profile-email" class="text-sm text-gray-500">akashvipatil@gmail.com</p>
+                        </div>
+                    </div>
+                    <button id="change-avatar-btn" class="mt-4 w-full py-2 rounded-lg font-semibold border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10">Change Avatar</button>
+                </div>
+
+                <div class="bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-sm border border-[var(--color-primary)]/10">
+                    <h3 class="font-bold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><button class="w-full text-left hover:text-[var(--color-primary)]" data-profile-tab="account">Account</button></li>
+                        <li><button class="w-full text-left hover:text-[var(--color-primary)]" data-profile-tab="orders">Orders</button></li>
+                        <li><button class="w-full text-left hover:text-[var(--color-primary)]" data-profile-tab="addresses">Addresses</button></li>
+                        <li><button class="w-full text-left hover:text-[var(--color-primary)]" data-profile-tab="preferences">Preferences</button></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="lg:col-span-2 space-y-6">
+                <div class="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-primary)]/20 rounded-2xl p-6 border border-[var(--color-primary)]/10">
+                    <h1 class="text-3xl font-bold mb-2">Welcome back, Akash!</h1>
+                    <p class="text-gray-600 dark:text-gray-300">Manage your account, track orders, and customize your experience.</p>
+                </div>
+
+                <section id="profile-tab-account" class="bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-sm border border-[var(--color-primary)]/10">
+                    <h2 class="text-2xl font-bold mb-4">Account Details</h2>
+                    <form id="profile-form" class="space-y-4">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold mb-1">First Name</label>
+                                <input type="text" id="pf-fname" value="Akash" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                            </div>
+                            <div>
+                                <label class="block font-semibold mb-1">Last Name</label>
+                                <input type="text" id="pf-lname" value="Patil" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Email</label>
+                            <input type="email" id="pf-email" value="akashvipatil@gmail.com" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                        </div>
+                        <div>
+                            <label class="block font-semibold mb-1">Phone</label>
+                            <input type="tel" id="pf-phone" value="+91 9096332327" class="w-full p-3 rounded-lg bg-[var(--color-card-bg)] text-[var(--color-text)] placeholder-gray-400 border border-[var(--color-primary)]/20 shadow-sm focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]">
+                        </div>
+                        <div class="flex gap-3">
+                            <button type="submit" class="bg-[var(--color-primary)] text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90">Save Changes</button>
+                            <button type="button" id="pf-reset" class="px-6 py-3 rounded-lg font-semibold border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10">Reset</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section id="profile-tab-orders" class="hidden bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-sm border border-[var(--color-primary)]/10">
+                    <h2 class="text-2xl font-bold mb-4">Recent Orders</h2>
+                    <div class="space-y-4" id="orders-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <section id="profile-tab-addresses" class="hidden bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-sm border border-[var(--color-primary)]/10">
+                    <h2 class="text-2xl font-bold mb-4">Saved Addresses</h2>
+                    <div class="grid md:grid-cols-2 gap-4" id="addresses-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </section>
+
+                <section id="profile-tab-preferences" class="hidden bg-[var(--color-card-bg)] rounded-2xl p-6 shadow-sm border border-[var(--color-primary)]/10">
+                    <h2 class="text-2xl font-bold mb-4">Preferences</h2>
+                    <div class="space-y-4">
+                        <label class="flex items-center gap-3">
+                            <input id="pref-newsletter" type="checkbox" class="rounded">
+                            <span>Subscribe to newsletter</span>
+                        </label>
+                        <label class="flex items-center gap-3">
+                            <input id="pref-sms" type="checkbox" class="rounded">
+                            <span>SMS notifications</span>
+                        </label>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </template>
+    
+    <script src="script.js"></script>
+</body>
+</html>

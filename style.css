@@ -1,0 +1,195 @@
+/* Custom base styles */
+body {
+    font-family: 'Inter', 'Quicksand', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Prevent accidental horizontal overflow on the whole app */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Lock body scroll when mobile menu is open */
+.no-scroll {
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Quicksand', sans-serif;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 4px rgba(255,255,255,0.8);
+}
+
+/* Define CSS variables for theming */
+:root {
+    --color-background: #FFF9F5; /* Warm soft background */
+    --color-text: #1F2937; /* Slate-800 for strong readability */
+    --color-primary: #EC4899; /* Vibrant pink */
+    --color-secondary: #10B981; /* Emerald accent for highlights */
+    --color-accent: #FDE68A; /* Amber-200 for subtle accents */
+    --color-highlight: #A7F3D0; /* Mint tint for decorative areas */
+    --color-card-bg: #FFFFFF;
+}
+
+html.dark {
+    --color-background: #0F172A; /* Slate-900 */
+    --color-text: #E5E7EB; /* Gray-200 */
+    --color-primary: #F472B6; /* Softer pink for dark mode */
+    --color-secondary: #34D399; /* Lighter emerald */
+    --color-accent: #F59E0B; /* Amber-500 */
+    --color-highlight: #065F46; /* Deep teal accents */
+    --color-card-bg: #111827; /* Gray-900 card */
+}
+
+/* Custom animation for adding to cart */
+@keyframes addToCartAnimation {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.add-to-cart-animation {
+    animation: addToCartAnimation 0.5s ease-in-out;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Mobile-first typography trims */
+@media (max-width: 640px) {
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.375rem; }
+    .container { padding-left: 1rem; padding-right: 1rem; }
+}
+
+/* Footer subtle animations */
+@keyframes gradientShift {
+    0% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(10px) translateX(6px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes gradientSlide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+.animate-gradient-shift {
+    animation: gradientShift 10s ease-in-out infinite;
+}
+
+.animate-gradient-slide {
+    animation: gradientSlide 6s linear infinite;
+}
+
+/* Marquee */
+.marquee {
+    position: relative;
+}
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+.marquee-track {
+    white-space: nowrap;
+    will-change: transform;
+    animation: marqueeScroll 18s linear infinite;
+}
+@keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+/* Subtle lift effect */
+.hover-lift {
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    border-color: rgba(236, 72, 153, 0.35);
+}
+
+/* Hide horizontal scrollbar for carousels */
+.scrollbar-none {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar { /* Chrome, Safari */
+    display: none;
+}
+
+/* Hide native scrollbars for carousels */
+.scrollbar-none {
+    scrollbar-width: none; /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+/* Cursor feedback for drag */
+#testimonials-carousel.dragging {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+}
+
+/* Testimonial focus styles */
+.testimonial-card {
+    filter: blur(1.5px) saturate(0.92);
+    opacity: 0.65;
+    transform: scale(0.94);
+    transition: transform .35s ease, opacity .35s ease, filter .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.testimonial-card.active {
+    filter: blur(0) saturate(1);
+    opacity: 1;
+    transform: scale(1.06);
+    box-shadow: 0 18px 34px rgba(0,0,0,0.14);
+    border-color: rgba(236, 72, 153, 0.5);
+}
+
+/* Dots */
+#testimonials-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: rgba(236, 72, 153, 0.3);
+    border: 1px solid rgba(236, 72, 153, 0.35);
+    transition: width .2s ease, background-color .2s ease;
+}
+#testimonials-dots button.active {
+    width: 18px;
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* Fade edges for carousel for a premium look */
+#testimonials-carousel {
+    position: relative;
+    mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+}
+
+/* Testimonial card subtle divider for header/body */
+.testimonial-card .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* Improve focus ring on carousel for accessibility */
+#testimonials-carousel:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 6px rgba(236, 72, 153, 0.25);
+    border-radius: 16px;
+}
