@@ -16,6 +16,9 @@ const app = {
         this.updateCartCounter();
         lucide.createIcons();
         this.checkTheme();
+        this.setupScrollAnimations();
+        this.setupHeaderScrollEffect();
+        this.showOfferModalOncePerSession();
     },
 
     // --- PAGE RENDERING & NAVIGATION ---
@@ -45,6 +48,9 @@ const app = {
         if (page === 'profile') this.renderProfilePage();
 
         lucide.createIcons();
+
+        // Re-run animations after new content
+        this.setupScrollAnimations();
     },
 
     // --- PAGE-SPECIFIC RENDER LOGIC ---
@@ -55,6 +61,12 @@ const app = {
 
         // Initialize testimonials carousel if present
         this.setupTestimonialsCarousel();
+
+        // Initialize premium feature-card hover light effect
+        this.setupFeatureCardPointerLight();
+
+        // Initialize stats count up when in view
+        this.setupCountUpStats();
     },
 
     renderShopPage(params = {}) {
@@ -63,8 +75,19 @@ const app = {
         if (params.category) document.getElementById('category-filter').value = params.category;
         if (params.search) document.getElementById('search-bar').value = params.search;
 
+        // initialize dynamic price slider max based on products
+        const slider = document.getElementById('price-filter');
+        const max = Math.max(...this.products.map(p => p.price));
+        if (slider) {
+            slider.max = Math.ceil(max);
+            if (!params.maxPrice) slider.value = slider.max;
+            const priceValue = document.getElementById('price-value');
+            if (priceValue) priceValue.textContent = slider.value;
+        }
+
         this.applyFilters();
         this.setupShopEventListeners();
+        this.updateProductsCount();
     },
     
     renderProductDetailPage(productId) {
@@ -73,59 +96,88 @@ const app = {
             this.navigateTo('shop');
             return;
         }
-
+    
         const placeholder = 'https://placehold.co/600x400/F3F4F6/111827?text=Product+Image';
+    
+        // Image & Badges
         document.getElementById('product-image').src = product.image || placeholder;
         document.getElementById('product-image').onerror = function(){ this.onerror=null; this.src = placeholder; };
         document.getElementById('product-image').alt = product.name;
+    
+        document.getElementById('product-age-badge').textContent = product.age;
+        document.getElementById('product-tag-badge').textContent = product.tag;
+    
+        // Main Details
         document.getElementById('product-name').textContent = product.name;
-        document.getElementById('product-price').textContent = `₹ ${product.price.toFixed(2)}`;
+        document.getElementById('product-short-description').textContent = product.description;
+        document.getElementById('product-price').textContent = `₹${product.price.toFixed(2)}`;
+    
+        // Rating
+        const ratingContainer = document.getElementById('product-rating-stars');
+        if (ratingContainer) {
+            ratingContainer.innerHTML = Array(product.rating || 0).fill('<i data-lucide="star"></i>').join('');
+        }
+    
+        // Accordion Content
         document.getElementById('product-description').textContent = product.description;
         document.getElementById('product-nutrition').innerHTML = product.nutrition;
         document.getElementById('product-ingredients').innerHTML = product.ingredients;
-
+    
         const addToCartBtn = document.getElementById('add-to-cart-btn');
         addToCartBtn.onclick = () => {
             const quantity = parseInt(document.getElementById('product-quantity').value);
             this.addToCart(product.id, quantity);
         };
+    
+        lucide.createIcons();
+        this.setupScrollAnimations();
     },
 
     renderCartPage() {
-        const container = document.getElementById('cart-container');
+        const itemsContainer = document.getElementById('cart-items-container');
+        const summaryContainer = document.getElementById('cart-summary-container');
+        
         if (this.cart.length === 0) {
-            container.innerHTML = `
-                <div class="text-center w-full py-16">
+            document.getElementById('cart-container').innerHTML = `
+                <div class="text-center w-full py-16 col-span-full">
                     <h2 class="text-2xl font-semibold mb-4">Your cart is empty!</h2>
                     <p class="mb-6">Looks like you haven't added any yummy treats yet.</p>
-                    <button class="bg-[var(--color-primary)] text-white px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90" onclick="app.navigateTo('shop')">Start Shopping</button>
+                    <button class="bg-[var(--color-primary)] text-white px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 transition-all" onclick="app.navigateTo('shop')">Start Shopping</button>
                 </div>
             `;
             return;
         }
-
-        const itemsHtml = `<div class="lg:w-2/3 space-y-4">${this.cart.map(item => {
+    
+        const itemsHtml = this.cart.map(item => {
             const product = this.products.find(p => p.id === item.id);
+            const itemSubtotal = (product.price * item.quantity).toFixed(2);
+            
             return `
-                <div class="flex items-center bg-[var(--color-card-bg)] p-4 rounded-lg shadow-sm gap-4 border border-[var(--color-primary)]/10">
-                    <img src="${product.image}" alt="${product.name}" class="w-24 h-24 rounded-md object-cover">
-                    <div class="flex-grow">
-                        <h3 class="font-bold">${product.name}</h3>
-                        <p class="text-sm text-gray-500">₹${product.price.toFixed(2)}</p>
+                <div class="cart-item-card reveal">
+                    <img src="${product.image}" alt="${product.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-title">${product.name}</h3>
+                        <p class="cart-item-price">₹${product.price.toFixed(2)} per item</p>
+                        <div class="cart-item-actions">
+                            <div class="quantity-controls">
+                                <button class="quantity-btn-small" onclick="app.updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="quantity-input-small" onchange="app.updateCartQuantity(${item.id}, parseInt(this.value))">
+                                <button class="quantity-btn-small" onclick="app.updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="app.removeFromCart(${item.id})">
+                                <i data-lucide="trash-2" class="w-5 h-5"></i>
+                            </button>
+                        </div>
                     </div>
-                    <div class="flex items-center border rounded-lg">
-                        <button class="px-3 py-1" onclick="app.updateCartQuantity(${item.id}, ${item.quantity - 1})">-</button>
-                        <input type="number" value="${item.quantity}" min="1" class="w-12 text-center border-none bg-transparent focus:ring-0" onchange="app.updateCartQuantity(${item.id}, parseInt(this.value))">
-                        <button class="px-3 py-1" onclick="app.updateCartQuantity(${item.id}, ${item.quantity + 1})">+</button>
-                    </div>
-                    <p class="font-semibold w-20 text-right">₹${(product.price * item.quantity).toFixed(2)}</p>
-                    <button class="text-gray-400 hover:text-red-500" onclick="app.removeFromCart(${item.id})"><i data-lucide="trash-2"></i></button>
+                    <p class="cart-item-subtotal">₹${itemSubtotal}</p>
                 </div>
             `;
-        }).join('')}</div>`;
-
-        container.innerHTML = itemsHtml + this.createCartSummaryHtml('cart-page');
+        }).join('');
+    
+        itemsContainer.innerHTML = itemsHtml;
+        summaryContainer.innerHTML = this.createCartSummaryHtml('cart-page');
         lucide.createIcons();
+        this.setupScrollAnimations();
     },
 
     renderCheckoutPage() {
@@ -243,171 +295,148 @@ const app = {
 
     // --- UI COMPONENTS & HELPERS ---
     createProductCard(product) {
-        const placeholder = 'https://placehold.co/400x400/F3F4F6/111827?text=Product+Image';
-        return `
-            <div class="bg-[var(--color-card-bg)] rounded-xl shadow-sm overflow-hidden group cursor-pointer border border-[var(--color-primary)]/10 hover:shadow-md hover:border-[var(--color-primary)]/30 transition-all" onclick="app.navigateTo('product-detail', { productId: ${product.id} })">
-                <div class="relative aspect-[4/3] overflow-hidden">
-                    <img src="${product.image || ''}" alt="${product.name}" loading="lazy" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='${placeholder}';">
-                    <div class="absolute left-2 top-2">
-                        <span class="px-2 py-0.5 text-[10px] md:text-xs rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)]">Bestseller</span>
-                    </div>
-                    <button class="absolute bottom-2 right-2 bg-[var(--color-primary)] text-white w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all" onclick="event.stopPropagation(); app.addToCart(${product.id});" aria-label="Add ${product.name} to cart">
-                        <i data-lucide="shopping-cart"></i>
-                    </button>
-                </div>
-                <div class="p-2.5 md:p-4">
-                    <h3 class="font-semibold text-sm md:text-base line-clamp-2 min-h-[2.5rem]">${product.name}</h3>
-                    <div class="mt-1 md:mt-2 flex items-center justify-between">
-                        <p class="text-[var(--color-primary)] font-bold text-sm md:text-base">₹${product.price.toFixed(2)}</p>
-                        <button class="px-2.5 py-1 text-xs md:text-sm rounded-full border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10" onclick="event.stopPropagation(); app.addToCart(${product.id});">Add</button>
-                    </div>
-                </div>
+    const placeholder = 'https://placehold.co/400x400/F3F4F6/111827?text=Product+Image';
+    return `
+        <div class="product-card bg-[var(--color-card-bg)] rounded-xl shadow-sm border border-[var(--color-primary)]/10 hover:border-[var(--color-primary)]/30 transition-all cursor-pointer" onclick="app.navigateTo('product-detail', { productId: ${product.id} })">
+            <div class="product-image-wrapper aspect-[4/3]">
+                <img src="${product.image || ''}" alt="${product.name}" loading="lazy" class="product-image w-full h-full object-cover" onerror="this.onerror=null;this.src='${placeholder}';">
+                <span class="bestseller-badge">Bestseller</span>
+                <button class="add-to-cart-btn-overlay" onclick="event.stopPropagation(); app.addToCart(${product.id});" aria-label="Add ${product.name} to cart">
+                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                </button>
             </div>
-        `;
-    },
+            <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-price">₹${product.price.toFixed(2)}</p>
+            </div>
+        </div>
+    `;
+},
 
     setupTestimonialsCarousel() {
-        const scroller = document.getElementById('testimonials-carousel');
+        const carousel = document.getElementById('testimonials-carousel');
         const track = document.getElementById('testimonials-track');
-        if (!scroller || !track) return;
-
-        // Buttons (overlay)
-        const btnPrev = document.getElementById('testimonials-prev-ovl');
-        const btnNext = document.getElementById('testimonials-next-ovl');
-
-        const cards = Array.from(track.querySelectorAll('.testimonial-card'));
-        const getTargetLeft = (index) => {
-            const card = cards[index];
-            const left = card.offsetLeft;
-            const centered = left - (scroller.clientWidth - card.clientWidth) / 2;
-            return Math.max(0, Math.min(centered, scroller.scrollWidth - scroller.clientWidth));
-        };
-        const getNearestIndex = () => {
-            let nearest = 0;
-            let best = Infinity;
-            for (let i = 0; i < cards.length; i++) {
-                const target = getTargetLeft(i);
-                const d = Math.abs(scroller.scrollLeft - target);
-                if (d < best) { best = d; nearest = i; }
-            }
-            return nearest;
-        };
-
-        let currentIndex = 0;
-        const setActiveByIndex = (index) => {
-            cards.forEach((c, i) => c.classList.toggle('active', i === index));
-            const dots = document.querySelectorAll('#testimonials-dots button');
-            dots.forEach((d, i) => d.classList.toggle('active', i === index));
-        };
-        const goToIndex = (index, behavior = 'smooth') => {
-            const total = cards.length;
-            if (total === 0) return;
-            const i = (index + total) % total;
-            scroller.scrollTo({ left: getTargetLeft(i), behavior });
-            setActiveByIndex(i);
-            currentIndex = i;
-        };
-
-        if (btnPrev) btnPrev.addEventListener('click', () => goToIndex(currentIndex - 1));
-        if (btnNext) btnNext.addEventListener('click', () => goToIndex(currentIndex + 1));
-
-        // Auto-scroll
-        let autoTimer = null;
-        const startAuto = () => {
-            stopAuto();
-            autoTimer = setInterval(() => {
-                const atEnd = Math.ceil(scroller.scrollLeft + scroller.clientWidth) >= scroller.scrollWidth;
-                if (atEnd) scroller.scrollTo({ left: 0, behavior: 'smooth' });
-                else scrollByCard(1);
-            }, 3500);
-        };
-        const stopAuto = () => autoTimer && (clearInterval(autoTimer), autoTimer = null);
-
-        scroller.addEventListener('mouseenter', stopAuto);
-        scroller.addEventListener('mouseleave', startAuto);
-
-        // Drag to scroll (mouse + touch)
-        let isDown = false;
-        let startX = 0;
-        let scrollStart = 0;
-        const onDown = (pageX) => {
-            isDown = true; startX = pageX; scrollStart = scroller.scrollLeft; scroller.classList.add('dragging'); stopAuto();
-        };
-        const onMove = (pageX) => {
-            if (!isDown) return; const dx = pageX - startX; scroller.scrollLeft = scrollStart - dx;
-        };
-        const onUp = () => {
-            if (!isDown) return;
-            isDown = false; scroller.classList.remove('dragging');
-            const nearest = getNearestIndex();
-            goToIndex(nearest);
-            startAuto();
-        };
-
-        scroller.addEventListener('mousedown', (e) => onDown(e.pageX));
-        scroller.addEventListener('mousemove', (e) => onMove(e.pageX));
-        window.addEventListener('mouseup', onUp);
-
-        scroller.addEventListener('touchstart', (e) => onDown(e.touches[0].pageX), { passive: true });
-        scroller.addEventListener('touchmove', (e) => onMove(e.touches[0].pageX), { passive: true });
-        scroller.addEventListener('touchend', onUp);
-
-        // Active center detection and dots
+        const navPrev = document.getElementById('testimonials-prev-ovl');
+        const navNext = document.getElementById('testimonials-next-ovl');
         const dotsContainer = document.getElementById('testimonials-dots');
-        if (dotsContainer) {
-            dotsContainer.innerHTML = cards.map((_, i) => `<button aria-label="Go to testimonial ${i+1}"></button>`).join('');
+        
+        if (!carousel || !track) return;
+    
+        const cards = Array.from(track.querySelectorAll('.testimonial-card'));
+        let activeCardIndex = 0;
+        
+        // Create dots dynamically
+        if (dotsContainer && cards.length > 0) {
+            dotsContainer.innerHTML = '';
+            cards.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+                dot.addEventListener('click', () => this.goToCard(i));
+                dotsContainer.appendChild(dot);
+            });
         }
-        const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('button')) : [];
-
-        const snapToNearest = () => {
-            const nearestIdx = getNearestIndex();
-            setActiveByIndex(nearestIdx);
-            currentIndex = nearestIdx;
+    
+        // Update the active card and dot
+        const updateActiveState = (index) => {
+            cards.forEach((card, i) => {
+                card.classList.toggle('active', i === index);
+            });
+            const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('button')) : [];
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            activeCardIndex = index;
         };
-
-        // Update active on scroll and on load/resize
-        const onScrollThrottled = (() => {
-            let ticking = false;
-            return () => {
-                if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        snapToNearest();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            };
-        })();
-        scroller.addEventListener('scroll', onScrollThrottled);
-        window.addEventListener('resize', onScrollThrottled);
-
-        // Dots click
-        dots.forEach((dot, i) => dot.addEventListener('click', () => goToIndex(i)));
-
-        // Helper to move relative to current index (missing earlier)
-        const scrollByCard = (delta) => {
-            if (!Number.isFinite(delta) || cards.length === 0) return;
-            goToIndex(currentIndex + delta);
+        
+        // Scroll the carousel to a specific card
+        this.goToCard = (index) => {
+            if (cards.length === 0) return;
+            const safeIndex = Math.max(0, Math.min(index, cards.length - 1));
+            const card = cards[safeIndex];
+            
+            // Calculate the scroll position to center the card
+            const scrollPosition = card.offsetLeft - (carousel.offsetWidth / 2) + (card.offsetWidth / 2);
+            carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+            
+            updateActiveState(safeIndex);
         };
-
-        // Keyboard navigation for accessibility
-        scroller.addEventListener('keydown', (e) => {
-            const key = e.key;
-            if (key === 'ArrowLeft') { e.preventDefault(); scrollByCard(-1); }
-            if (key === 'ArrowRight') { e.preventDefault(); scrollByCard(1); }
-            if (key === 'Home') { e.preventDefault(); goToIndex(0); }
-            if (key === 'End') { e.preventDefault(); goToIndex(cards.length - 1); }
+    
+        // Auto-advance the carousel
+        let autoPlayTimer = null;
+        const startAutoPlay = () => {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            stopAutoPlay();
+            autoPlayTimer = setInterval(() => {
+                const nextIndex = (activeCardIndex + 1) % cards.length;
+                this.goToCard(nextIndex);
+            }, 4000);
+        };
+    
+        const stopAutoPlay = () => {
+            if (autoPlayTimer) {
+                clearInterval(autoPlayTimer);
+                autoPlayTimer = null;
+            }
+        };
+        
+        // Handle manual interaction to stop auto-play
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+        carousel.addEventListener('touchstart', stopAutoPlay, { passive: true });
+    
+        // Click handlers for navigation buttons
+        if (navPrev) {
+            navPrev.addEventListener('click', () => this.goToCard(activeCardIndex - 1));
+        }
+        if (navNext) {
+            navNext.addEventListener('click', () => this.goToCard(activeCardIndex + 1));
+        }
+        
+        // Add drag functionality
+        let isDragging = false;
+        let startX;
+        let scrollLeft;
+    
+        carousel.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            carousel.classList.add('dragging');
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+            stopAutoPlay();
         });
-
-        // Kick off
-        // Slight delay to ensure DOM sizes are stable then set initial active and start auto
-        setTimeout(() => {
-            const initial = getNearestIndex();
-            goToIndex(initial, 'auto');
-            // Respect reduced motion preference
-            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (!prefersReduced) startAuto();
-        }, 50);
+    
+        carousel.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                carousel.classList.remove('dragging');
+                
+                // Snap to the nearest card after drag
+                const nearestIndex = Math.round(carousel.scrollLeft / cards[0].offsetWidth);
+                this.goToCard(nearestIndex);
+                startAutoPlay();
+            }
+        });
+    
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 1.5; // Controls drag speed
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+    
+        // Handle initial state and resize
+        const setInitialState = () => {
+            updateActiveState(0);
+            this.goToCard(0);
+            startAutoPlay();
+        };
+        
+        window.addEventListener('load', setInitialState);
+        window.addEventListener('resize', setInitialState);
+        
+        // Initial setup
+        setInitialState();
     },
     
     createCartSummaryHtml(context) {
@@ -417,24 +446,27 @@ const app = {
         }, 0);
         const shipping = subtotal > 0 ? 5.00 : 0;
         const total = subtotal + shipping;
-
-        const wrapperClass = context === 'cart-page' ? 'lg:w-1/3' : '';
         
         return `
-            <div class="${wrapperClass}">
-                <div class="bg-[var(--color-card-bg)] p-6 rounded-lg shadow-sm sticky top-24 border border-[var(--color-primary)]/10">
-                    <h2 class="text-2xl font-bold mb-4">Order Summary</h2>
-                    <div class="space-y-2">
-                        <div class="flex justify-between"><span>Subtotal</span><span>₹${subtotal.toFixed(2)}</span></div>
-                        <div class="flex justify-between"><span>Shipping</span><span>₹${shipping.toFixed(2)}</span></div>
-                        <div class="flex justify-between font-bold text-lg border-t pt-2 mt-2"><span>Total</span><span>₹${total.toFixed(2)}</span></div>
-                    </div>
-                    ${context === 'cart-page' ? `
-                        <button class=\"w-full mt-6 bg-[var(--color-primary)] text-white py-3 rounded-lg font-bold text-lg hover:opacity-90\" onclick=\"app.navigateTo('checkout')\">Proceed to Checkout</button>
-                    ` : `
-                        <button id=\"place-order-btn\" class=\"w-full mt-6 bg-[var(--color-primary)] text-white py-3 rounded-lg font-bold text-lg hover:opacity-90\">Place Order</button>
-                    `}
+            <div class="order-summary-card">
+                <h2 class="summary-heading">Order Summary</h2>
+                <div class="space-y-4">
+                    <div class="summary-row"><span>Subtotal</span><span>₹${subtotal.toFixed(2)}</span></div>
+                    <div class="summary-row"><span>Shipping</span><span>₹${shipping.toFixed(2)}</span></div>
                 </div>
+                <div class="summary-total summary-row">
+                    <span>Total</span>
+                    <span>₹${total.toFixed(2)}</span>
+                </div>
+                ${context === 'cart-page' ? `
+                    <button class="checkout-btn" onclick="app.navigateTo('checkout')">
+                        Proceed to Checkout
+                    </button>
+                ` : `
+                    <button id="place-order-btn" class="checkout-btn">
+                        Place Order
+                    </button>
+                `}
             </div>
         `;
     },
@@ -533,13 +565,20 @@ const app = {
         noProductsMessage.classList.toggle('hidden', filteredProducts.length > 0);
 
         lucide.createIcons();
+
+        // update count
+        this.updateProductsCount(filteredProducts.length);
     },
     
     resetFilters() {
         document.getElementById('age-filter').value = 'all';
         document.getElementById('category-filter').value = 'all';
-        document.getElementById('price-filter').value = 10;
-        document.getElementById('price-value').textContent = 10;
+        // set dynamic max from product prices
+        const max = Math.max(...this.products.map(p => p.price));
+        const slider = document.getElementById('price-filter');
+        slider.max = Math.ceil(max);
+        slider.value = slider.max;
+        document.getElementById('price-value').textContent = slider.value;
         document.getElementById('search-bar').value = '';
         this.applyFilters();
     },
@@ -560,8 +599,41 @@ const app = {
             cartIconBtn.classList.add('add-to-cart-animation');
             setTimeout(() => cartIconBtn.classList.remove('add-to-cart-animation'), 500);
         }
+        
+        // --- NEW: Show a confirmation pop-up
+        this.showAddToCartPopup();
     },
+    showAddToCartPopup() {
+        // Check if a pop-up already exists to prevent duplicates
+        const existingPopup = document.getElementById('add-to-cart-popup');
+        if (existingPopup) {
+            existingPopup.remove();
+            clearTimeout(window.popupTimeout);
+        }
+        
+        const popup = document.createElement('div');
+        popup.id = 'add-to-cart-popup';
+        popup.className = 'add-to-cart-popup';
+        popup.innerHTML = `
+            <div class="content">
+                <i data-lucide="check-circle" class="icon-success"></i>
+                <span>Added to cart!</span>
+            </div>
+            <button onclick="app.navigateTo('cart');" class="view-cart-btn">View Cart</button>
+        `;
     
+        document.body.appendChild(popup);
+        lucide.createIcons(); // Re-render icons for the new element
+    
+        // Show the pop-up with a slight delay for a smooth animation
+        setTimeout(() => popup.classList.add('visible'), 50);
+    
+        // Automatically remove the pop-up after a few seconds
+        window.popupTimeout = setTimeout(() => {
+            popup.classList.remove('visible');
+            setTimeout(() => popup.remove(), 300); // Remove element after transition ends
+        }, 4000);
+    },
     removeFromCart(productId) {
         this.cart = this.cart.filter(item => item.id !== productId);
         this.updateCartCounter();
@@ -687,9 +759,109 @@ const app = {
         }
     },
 
+    // --- ANIMATIONS ---
+    setupScrollAnimations() {
+        const elements = Array.from(document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right, .stagger'));
+        if (!elements.length) return;
+
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReduced) {
+            elements.forEach(el => el.classList.add('in-view'));
+            return;
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    if (target.classList.contains('stagger')) {
+                        const children = Array.from(target.children);
+                        children.forEach((child, i) => child.style.setProperty('--stagger', `${Math.min(i * 60, 480)}ms`));
+                        target.classList.add('in-view');
+                    } else {
+                        target.classList.add('in-view');
+                    }
+                    observer.unobserve(target);
+                }
+            });
+        }, { threshold: 0.18 });
+
+        elements.forEach(el => observer.observe(el));
+    },
+
+    // Subtle pointer-follow glow for premium feature cards
+    setupFeatureCardPointerLight() {
+        const cards = Array.from(document.querySelectorAll('.feature-card'));
+        if (!cards.length) return;
+        const updateVars = (el, x, y) => {
+            const rect = el.getBoundingClientRect();
+            const relX = ((x - rect.left) / rect.width) * 100;
+            const relY = ((y - rect.top) / rect.height) * 100;
+            el.style.setProperty('--mx', `${relX}%`);
+            el.style.setProperty('--my', `${relY}%`);
+        };
+        const onMove = (e) => {
+            const target = e.currentTarget;
+            const x = e.touches ? e.touches[0].clientX : e.clientX;
+            const y = e.touches ? e.touches[0].clientY : e.clientY;
+            updateVars(target, x, y);
+        };
+        cards.forEach(card => {
+            card.addEventListener('mousemove', onMove);
+            card.addEventListener('touchmove', onMove, { passive: true });
+        });
+    },
+
+    setupHeaderScrollEffect() {
+        const header = document.getElementById('header');
+        if (!header) return;
+        const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 8);
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    },
+
+    setupCountUpStats() {
+        const numbers = Array.from(document.querySelectorAll('.stat-number'));
+        if (!numbers.length) return;
+        const animate = (el) => {
+            const targetRaw = el.getAttribute('data-count');
+            const target = parseFloat(targetRaw);
+            const isFloat = targetRaw.includes('.')
+            const duration = 1400;
+            const start = performance.now();
+            const format = (v) => isFloat ? v.toFixed(1) : Math.round(v).toLocaleString();
+            const step = (t) => {
+                const p = Math.min(1, (t - start) / duration);
+                const eased = p < .5 ? 2*p*p : -1 + (4 - 2*p) * p; // easeInOutQuad
+                const val = target * eased;
+                el.textContent = format(val);
+                if (p < 1) requestAnimationFrame(step);
+                else el.textContent = format(target);
+            };
+            requestAnimationFrame(step);
+        };
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    animate(el);
+                    obs.unobserve(el);
+                }
+            });
+        }, { threshold: .4 });
+        numbers.forEach(n => observer.observe(n));
+    },
+
     setupShopEventListeners() {
         const filters = ['age-filter', 'category-filter', 'price-filter', 'search-bar'];
-        filters.forEach(id => document.getElementById(id)?.addEventListener('input', () => this.applyFilters()));
+        // debounce for search and sliders
+        const debounce = (fn, delay = 200) => { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), delay); }; };
+        filters.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const handler = id === 'search-bar' || id === 'price-filter' ? debounce(() => this.applyFilters()) : () => this.applyFilters();
+            el.addEventListener('input', handler);
+        });
         
         const priceValue = document.getElementById('price-value');
         if(priceValue) {
@@ -698,6 +870,13 @@ const app = {
 
         document.getElementById('reset-filters-btn')?.addEventListener('click', () => this.resetFilters());
     },
+
+    updateProductsCount(count) {
+        const el = document.getElementById('products-count');
+        if (!el) return;
+        if (typeof count === 'number') el.textContent = count;
+        else el.textContent = document.querySelectorAll('#products-grid > *').length;
+    },
     
     checkTheme(){
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -705,6 +884,76 @@ const app = {
         } else {
             document.documentElement.classList.remove('dark');
         }
+    },
+
+    // --- OFFER MODAL ---
+    showOfferModalOncePerSession() {
+        try {
+            if (sessionStorage.getItem('MunchkinsDelightsOfferShown') === '1') return;
+        } catch (e) { /* ignore storage errors */ }
+
+        const backdrop = document.createElement('div');
+        backdrop.className = 'offer-backdrop';
+        backdrop.setAttribute('role', 'dialog');
+        backdrop.setAttribute('aria-modal', 'true');
+        backdrop.setAttribute('aria-label', 'Limited time offer');
+
+        backdrop.innerHTML = `
+            <div class="offer-modal offer-confetti">
+                <button class="offer-close" aria-label="Close offer" data-offer-close>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+                <div class="offer-hero">
+                    <div class="offer-ribbon">LIMITED TIME</div>
+                    <div class="offer-content">
+                        <div>
+                            <h3 class="offer-title">Welcome! Enjoy 50% OFF your first order</h3>
+                            <p class="offer-subtitle">Use code <strong>WELCOME50</strong> at checkout. Because little tummies deserve big love.</p>
+                            <div class="offer-bullets">
+                                <span class="offer-chip"><i data-lucide="sparkles"></i> Premium Quality</span>
+                                <span class="offer-chip"><i data-lucide="shield-check"></i> Pediatrician Approved</span>
+                                <span class="offer-chip"><i data-lucide="leaf"></i> 100% Organic</span>
+                            </div>
+                            <div class="offer-cta-row">
+                                <button class="offer-cta" data-offer-cta>
+                                    <i data-lucide="shopping-bag"></i>
+                                    Shop Now
+                                </button>
+                                <button class="offer-ghost" data-offer-close>Maybe later</button>
+                            </div>
+                        </div>
+                        <div class="offer-illustration">
+                            <img src="offer.png" alt="Offer Illustration">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(backdrop);
+        lucide.createIcons();
+
+        requestAnimationFrame(() => backdrop.classList.add('visible'));
+
+        const setShown = () => {
+            try { sessionStorage.setItem('MunchkinsDelightsOfferShown', '1'); } catch (e) {}
+        };
+
+        const close = () => {
+            backdrop.classList.remove('visible');
+            setTimeout(() => backdrop.remove(), 350);
+        };
+
+        backdrop.addEventListener('click', (e) => {
+            if (e.target === backdrop) { setShown(); close(); }
+        });
+        backdrop.querySelectorAll('[data-offer-close]').forEach(btn => btn.addEventListener('click', () => { setShown(); close(); }));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { setShown(); close(); } }, { once: true });
+        backdrop.querySelector('[data-offer-cta]').addEventListener('click', () => {
+            setShown();
+            close();
+            this.navigateTo('shop');
+        });
     }
 };
 

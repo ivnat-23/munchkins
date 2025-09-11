@@ -42,7 +42,6 @@
                     <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="home" onclick="app.navigateTo('home')">Home</a>
                     <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="shop" onclick="app.navigateTo('shop')">Shop</a>
                     <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="about" onclick="app.navigateTo('about')">About Us</a>
-                    <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="blog" onclick="app.navigateTo('blog')">Blog</a>
                     <a href="#" class="nav-link hover:text-[var(--color-primary)] transition-colors" data-page="contact" onclick="app.navigateTo('contact')">Contact</a>
                 </div>
                 <div id="search-bar-container" class="hidden w-full max-w-sm">
@@ -89,7 +88,6 @@
                 <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('home')">Home</a>
                 <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop')">Shop</a>
                 <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('about')">About Us</a>
-                <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('blog')">Blog</a>
                 <a href="#" class="block py-2 px-4 text-sm hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('contact')">Contact</a>
             </div>
             <div class="border-t border-[var(--color-primary)]/10">
@@ -118,50 +116,59 @@
             </div>
     </main>
 
-    <footer class="relative mt-16 overflow-hidden">
-        <div class="absolute inset-0 -z-10">
-            <div class="absolute -top-20 -left-10 w-64 h-64 rounded-full bg-[var(--color-primary)]/18 blur-3xl animate-gradient-shift"></div>
-            <div class="absolute -bottom-24 -right-10 w-72 h-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl animate-gradient-shift" style="animation-delay:1.5s"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-[var(--color-primary)]/16 via-transparent to-[var(--color-primary)]/10 dark:from-[var(--color-primary)]/14 dark:via-transparent dark:to-[var(--color-primary)]/10"></div>
+    <footer class="mt-16 bg-gradient-to-b from-[var(--color-primary)]/10 to-[var(--color-secondary)]/10 dark:from-[var(--color-primary)]/5 dark:to-[var(--color-secondary)]/5">
+        <div class="relative bg-lime-100 dark:bg-lime-900 overflow-hidden">
+            <HR></HR>
         </div>
-        <div class="absolute top-0 left-0 w-full h-1 overflow-hidden">
-            <div class="h-full w-1/3 bg-gradient-to-r from-transparent via-[var(--color-primary)] to-transparent animate-gradient-slide"></div>
-        </div>
-        <div class="container mx-auto px-6 py-10 md:py-14">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-2xl font-bold text-[var(--color-primary)] mb-3">Munchkins Delights</h3>
-                    <p class="text-sm opacity-90">Nourishing the next generation with love and the best organic ingredients.</p>
+    
+        <div class="container mx-auto px-6 py-12 md:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-16">
+                <div class="md:col-span-2">
+                    <a href="#" class="text-3xl font-extrabold text-[var(--color-primary)] flex items-center mb-3">
+                        Munchkins Delights
+                    </a>
+                    <p class="text-sm opacity-90 leading-relaxed max-w-sm">Nourishing the next generation with love and the best organic ingredients. We believe in pure, wholesome food for little ones.</p>
+                    <div class="mt-6">
+                        <h4 class="font-semibold mb-2">Join Our Family</h4>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email address" class="w-full px-4 py-3 rounded-l-xl bg-[var(--color-card-bg)] border border-[var(--color-primary)]/20 text-sm focus:ring-2 focus:ring-[var(--color-primary)]/40 transition">
+                            <button class="bg-[var(--color-primary)] p-3 rounded-r-xl text-white hover:bg-[var(--color-primary)]/80 transition-colors btn-primary-animated">
+                                <i data-lucide="send"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+    
                 <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <h4 class="font-bold mb-4">Products</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" onclick="app.navigateTo('about')" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>About Us</a></li>
-                        <li><a href="#" onclick="app.navigateTo('contact')" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>Contact</a></li>
-                        <li><a href="#" onclick="app.navigateTo('blog')" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>Blog</a></li>
-                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-all inline-flex items-center gap-2 group"><span class="w-1 h-1 rounded-full bg-[var(--color-primary)]/0 group-hover:bg-[var(--color-primary)] transition-colors"></span>FAQs</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors" onclick="app.navigateTo('shop', { category: 'Snacks' })">Snacks</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors" onclick="app.navigateTo('shop', { category: 'Cereals' })">Cereals</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors">Purees</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors">Combo Packs</a></li>
                     </ul>
                 </div>
+    
                 <div>
-                    <h4 class="font-semibold mb-4">Follow Us</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="hover:text-[var(--color-primary)] transition-transform transform hover:scale-110"><i data-lucide="twitter"></i></a>
-                        <a href="#" class="hover:text-[var(--color-primary)] transition-transform transform hover:scale-110"><i data-lucide="instagram"></i></a>
-                        <a href="#" class="hover:text-[var(--color-primary)] transition-transform transform hover:scale-110"><i data-lucide="facebook"></i></a>
-                    </div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors" onclick="app.navigateTo('about')">About Us</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors">Our Mission</a></li>
+                        <li><a href="#" class="hover:text-[var(--color-primary)] transition-colors" onclick="app.navigateTo('contact')">Contact Us</a></li>
+                    </ul>
                 </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Newsletter</h4>
-                    <p class="text-sm mb-2 opacity-90">Get yummy updates and special offers!</p>
-                    <div class="flex">
-                        <input type="email" placeholder="Your email" class="w-full px-4 py-2 rounded-l-lg border border-[var(--color-primary)]/20 bg-[var(--color-card-bg)] focus:ring-2 focus:ring-[var(--color-primary)]/40">
-                        <button class="bg-[var(--color-primary)] p-3 rounded-r-lg text-white hover:opacity-90 transition-transform transform hover:scale-105">
-                            <i data-lucide="send"></i>
-                        </button>
-                    </div>
-                </div>
+    
+                
             </div>
-            <div class="text-center text-sm mt-12 border-t border-[var(--color-primary)]/20 pt-8">
+    
+            <div class="flex items-center justify-center space-x-6 mt-12 mb-4">
+                <a href="#" class="text-gray-500 hover:text-[var(--color-primary)] transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                <a href="#" class="text-gray-500 hover:text-[var(--color-primary)] transition-colors"><i data-lucide="facebook" class="w-6 h-6"></i></a>
+                <a href="#" class="text-gray-500 hover:text-[var(--color-primary)] transition-colors"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+                <a href="#" class="text-gray-500 hover:text-[var(--color-primary)] transition-colors"><i data-lucide="youtube" class="w-6 h-6"></i></a>
+            </div>
+            
+            <div class="text-center text-xs opacity-70 mt-4">
                 &copy; 2025 Munchkins Delights. All Rights Reserved.
             </div>
         </div>
@@ -170,18 +177,34 @@
 
     <template id="home-template">
         <div class="space-y-16">
-            <section class="rounded-3xl bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-primary)]/30 p-6 md:p-16 text-center md:text-left flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <h1 class="text-3xl md:text-6xl font-bold mb-3 md:mb-4 leading-tight">Pure Goodness,<br> One Spoonful at a Time.</h1>
-                    <p class="text-base md:text-lg mb-6 md:mb-8">Organic, delicious, and lovingly made for your little one's happy tummy.</p>
-                    <button class="bg-[var(--color-primary)] text-white px-8 py-3 rounded-full text-lg font-semibold hover:opacity-90 transition-transform hover:scale-105" onclick="app.navigateTo('shop')">Shop Now</button>
+            <section class="relative rounded-3xl p-6 md:p-16 overflow-hidden gradient-border reveal">
+                <div class="absolute inset-0 -z-10">
+                    <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[var(--color-primary)]/15 blur-3xl"></div>
+                    <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[var(--color-secondary)]/15 blur-3xl"></div>
                 </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <img src="header-img.png" alt="Happy baby eating" class="rounded-3xl shadow-lg w-full max-w-sm md:max-w-full">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs font-semibold mb-3">Made with Pediatric Nutritionists</div>
+                        <h1 class="text-3xl md:text-6xl font-extrabold leading-tight mb-3 md:mb-4">Pure Goodness for Little Tummies</h1>
+                        <p class="text-base md:text-lg opacity-90 mb-6 md:mb-8 max-w-xl">Clean, organic meals crafted with love, backed by science, and delivered fresh to your door.</p>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <button class="bg-[var(--color-primary)] text-white px-6 md:px-8 py-3 rounded-full text-base md:text-lg font-semibold hover:opacity-90 btn-primary-animated" onclick="app.navigateTo('shop')">Shop Bestsellers</button>
+                            <button class="px-6 md:px-8 py-3 rounded-full text-base md:text-lg font-semibold border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('about')">Why Munchkins Delights?</button>
+                        </div>
+                        <div class="flex items-center gap-4 mt-6 opacity-90 text-sm">
+                            <div class="flex items-center gap-1"><i data-lucide="leaf" class="text-[var(--color-secondary)]"></i> 100% Organic</div>
+                            <div class="flex items-center gap-1"><i data-lucide="shield-check" class="text-[var(--color-primary)]"></i> Pediatrician Approved</div>
+                            <div class="flex items-center gap-1"><i data-lucide="recycle" class="text-[var(--color-primary)]"></i> Eco Packaging</div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-4 rounded-[28px] bg-gradient-to-tr from-[var(--color-primary)]/15 via-transparent to-[var(--color-secondary)]/15 blur-2xl -z-10"></div>
+                        <img src="header-img.png" alt="Happy baby eating" class="rounded-[28px] shadow-xl w-full max-w-md md:max-w-full animate-float">
+                    </div>
                 </div>
             </section>
 
-            <section class="relative">
+            <section class="relative reveal">
                 <div class="rounded-full border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 py-3 px-2 overflow-hidden">
                     <div class="marquee flex items-center">
                         <div class="marquee-track flex items-center gap-6 text-sm md:text-base font-semibold tracking-wide uppercase text-[var(--color-text)]">
@@ -218,150 +241,191 @@
                 </div>
             </section>
 
-            <section>
-                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4 md:mb-6">Our Products</h2>
-                <div class="flex flex-wrap gap-2 md:gap-3 justify-center mb-6 md:mb-10">
-                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Bestseller' })">Bestseller</button>
-                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Pancake Mix' })">Pancake Mix</button>
-                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Instant Mixes' })">Instant Mixes</button>
-                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Cookies' })">Cookies</button>
-                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Puffs' })">Puffs</button>
-                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Grab & Go' })">Grab & Go (Travel Pack)</button>
-                    <button class="px-4 py-2 rounded-full border border-[var(--color-primary)]/30 bg-[var(--color-card-bg)] hover:bg-[var(--color-primary)]/10" onclick="app.navigateTo('shop', { search: 'Milk Mix' })">Milk Mix</button>
+            <!-- <section class="reveal">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">Shop by Category</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
+                    <button class="group rounded-2xl overflow-hidden relative aspect-[5/4] bg-[var(--color-card-bg)] border border-[var(--color-primary)]/15 hover:border-[var(--color-primary)]/40 transition-all" onclick="app.navigateTo('shop', { search: 'Bestseller' })">
+                        <img src="https://placehold.co/400x320/FDE68A/111827?text=Bestsellers" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Bestsellers">
+                        <span class="absolute inset-x-0 bottom-0 m-2 px-2 py-1 text-xs md:text-sm rounded-lg bg-[var(--color-card-bg)]/90">Bestsellers</span>
+                    </button>
+                    <button class="group rounded-2xl overflow-hidden relative aspect-[5/4] bg-[var(--color-card-bg)] border border-[var(--color-primary)]/15 hover:border-[var(--color-primary)]/40 transition-all" onclick="app.navigateTo('shop', { search: 'Pancake Mix' })">
+                        <img src="https://placehold.co/400x320/FFC0CB/111827?text=Pancake+Mix" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Pancake Mix">
+                        <span class="absolute inset-x-0 bottom-0 m-2 px-2 py-1 text-xs md:text-sm rounded-lg bg-[var(--color-card-bg)]/90">Pancake Mix</span>
+                    </button>
+                    <button class="group rounded-2xl overflow-hidden relative aspect-[5/4] bg-[var(--color-card-bg)] border border-[var(--color-primary)]/15 hover:border-[var(--color-primary)]/40 transition-all" onclick="app.navigateTo('shop', { search: 'Instant Mixes' })">
+                        <img src="https://placehold.co/400x320/B0E0E6/111827?text=Instant+Mixes" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Instant Mixes">
+                        <span class="absolute inset-x-0 bottom-0 m-2 px-2 py-1 text-xs md:text-sm rounded-lg bg-[var(--color-card-bg)]/90">Instant Mixes</span>
+                    </button>
+                    <button class="group rounded-2xl overflow-hidden relative aspect-[5/4] bg-[var(--color-card-bg)] border border-[var(--color-primary)]/15 hover:border-[var(--color-primary)]/40 transition-all" onclick="app.navigateTo('shop', { search: 'Cookies' })">
+                        <img src="https://placehold.co/400x320/FCE7F3/111827?text=Cookies" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Cookies">
+                        <span class="absolute inset-x-0 bottom-0 m-2 px-2 py-1 text-xs md:text-sm rounded-lg bg-[var(--color-card-bg)]/90">Cookies</span>
+                    </button>
+                    <button class="group rounded-2xl overflow-hidden relative aspect-[5/4] bg-[var(--color-card-bg)] border border-[var(--color-primary)]/15 hover:border-[var(--color-primary)]/40 transition-all" onclick="app.navigateTo('shop', { search: 'Puffs' })">
+                        <img src="https://placehold.co/400x320/E0F2FE/111827?text=Puffs" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Puffs">
+                        <span class="absolute inset-x-0 bottom-0 m-2 px-2 py-1 text-xs md:text-sm rounded-lg bg-[var(--color-card-bg)]/90">Puffs</span>
+                    </button>
+                    <button class="group rounded-2xl overflow-hidden relative aspect-[5/4] bg-[var(--color-card-bg)] border border-[var(--color-primary)]/15 hover:border-[var(--color-primary)]/40 transition-all" onclick="app.navigateTo('shop', { search: 'Milk Mix' })">
+                        <img src="https://placehold.co/400x320/DCFCE7/111827?text=Milk+Mix" class="w-full h-full object-cover transition-transform group-hover:scale-105" alt="Milk Mix">
+                        <span class="absolute inset-x-0 bottom-0 m-2 px-2 py-1 text-xs md:text-sm rounded-lg bg-[var(--color-card-bg)]/90">Milk Mix</span>
+                    </button>
                 </div>
-            </section>
+            </section> -->
 
-            <section>
+            <section class="reveal">
                 <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Our Products</h2>
                 <div id="home-products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
-                    </div>
+                </div>
             </section>
             
-            <section class="relative rounded-3xl overflow-hidden">
-                <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-primary)]/10 via-transparent to-[var(--color-primary)]/10"></div>
+            <section class="relative rounded-3xl overflow-hidden reveal premium-smiles soft-moving-gradient">
+                <div class="absolute inset-0 -z-10 pointer-events-none">
+                    <div class="absolute -top-24 -left-20 w-72 h-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl animate-gradient-shift"></div>
+                    <div class="absolute -bottom-28 -right-24 w-80 h-80 rounded-full bg-[var(--color-secondary)]/10 blur-3xl animate-gradient-shift" style="animation-delay:.8s"></div>
+                </div>
+                <!-- Nano Banana Motifs -->
+                <div aria-hidden="true" class="nano-banana banana-1"></div>
+                <div aria-hidden="true" class="nano-banana banana-2"></div>
+                <div aria-hidden="true" class="nano-banana banana-3"></div>
                 <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-center p-6 md:p-12">
                     <div>
-                        <h2 class="text-2xl md:text-5xl font-extrabold leading-tight mb-2 md:mb-4">Real Food. Real Smiles.</h2>
-                        <p class="text-sm md:text-base opacity-90 mb-4 md:mb-6 max-w-xl">Thoughtfully crafted meals and snacks that make every bite nourishing, safe, and joyful for your little one.</p>
-                        <div class="flex flex-wrap gap-2 md:gap-3">
-                            <span class="px-2.5 py-1 rounded-full bg-[var(--color-primary)]/10 text-[var(--color-primary)] text-xs md:text-sm">Certified Clean</span>
-                            <span class="px-2.5 py-1 rounded-full bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] text-xs md:text-sm">Pediatrician Approved</span>
-                            <span class="px-2.5 py-1 rounded-full bg-[var(--color-accent)]/40 text-[var(--color-text)] text-xs md:text-sm">Farm-to-Spoon</span>
+                        <h2 class="text-2xl md:text-5xl font-extrabold leading-tight mb-3 md:mb-5 headline-accent">Real Food. Real Smiles.</h2>
+                        <p class="text-sm md:text-base opacity-90 mb-5 md:mb-7 max-w-xl tagline-soft">Thoughtfully crafted meals and snacks that make every bite nourishing, safe, and joyful for your little one.</p>
+                        <div class="flex flex-wrap gap-2.5 md:gap-3">
+                            <span class="badge-premium">
+                                <span class="badge-icon"><i data-lucide="sparkles"></i></span>
+                                <span class="badge-label">Certified Clean</span>
+                            </span>
+                            <span class="badge-premium">
+                                <span class="badge-icon"><i data-lucide="heart-pulse"></i></span>
+                                <span class="badge-label">Pediatrician Approved</span>
+                            </span>
+                            <span class="badge-premium">
+                                <span class="badge-icon"><i data-lucide="sprout"></i></span>
+                                <span class="badge-label">Farm-to-Spoon</span>
+                            </span>
                         </div>
                     </div>
-                    <div class="grid sm:grid-cols-2 gap-4 md:gap-6">
-                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
-                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
-                                <i data-lucide="leaf"></i>
-                            </div>
-                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">100% Natural</h3>
-                            <p class="text-xs md:text-sm opacity-80">No additives, no nasties—only whole, clean ingredients.</p>
+                    <div class="grid grid-cols-2 gap-3 md:gap-6">
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon leaf"><i data-lucide="leaf"></i></div>
+                            <h3 class="pebble-title">100% Natural</h3>
+                            <p class="pebble-text">No additives, no nasties—only whole, clean ingredients.</p>
                         </div>
-                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
-                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
-                                <i data-lucide="chef-hat"></i>
-                            </div>
-                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">Chef-Crafted</h3>
-                            <p class="text-xs md:text-sm opacity-80">Developed with pediatric nutritionists for balanced nutrition.</p>
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon chef"><i data-lucide="chef-hat"></i></div>
+                            <h3 class="pebble-title">Chef-Crafted</h3>
+                            <p class="pebble-text">Developed with pediatric nutritionists for balanced nutrition.</p>
                         </div>
-                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
-                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
-                                <i data-lucide="recycle"></i>
-                            </div>
-                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">Sustainably Sourced</h3>
-                            <p class="text-xs md:text-sm opacity-80">Responsible sourcing and recyclable packaging.</p>
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon tree"><i data-lucide="tree-pine"></i></div>
+                            <h3 class="pebble-title">Sustainably Sourced</h3>
+                            <p class="pebble-text">Responsible sourcing and recyclable packaging.</p>
                         </div>
-                        <div class="p-5 md:p-6 rounded-2xl border border-[var(--color-primary)]/10 bg-[var(--color-card-bg)]/60 backdrop-blur hover-lift">
-                            <div class="w-12 h-12 rounded-xl bg-[var(--color-primary)]/10 text-[var(--color-primary)] flex items-center justify-center mb-4">
-                                <i data-lucide="truck"></i>
-                            </div>
-                            <h3 class="font-semibold mb-1 md:mb-2 text-sm md:text-base">Freshly Delivered</h3>
-                            <p class="text-xs md:text-sm opacity-80">Packed with care and delivered on time.</p>
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon truck"><i data-lucide="truck"></i></div>
+                            <h3 class="pebble-title">Freshly Delivered</h3>
+                            <p class="pebble-text">Packed with care and delivered on time.</p>
                         </div>
                     </div>
                 </div>
-                <div class="grid grid-cols-3 gap-3 md:gap-4 text-center px-4 md:px-6 pb-6 md:pb-8">
-                    <div class="rounded-2xl p-3 md:p-4 bg-[var(--color-card-bg)]/60 border border-[var(--color-primary)]/10 hover-lift"><p class="text-2xl md:text-3xl font-extrabold text-[var(--color-primary)]">50k+</p><p class="text-[10px] md:text-xs uppercase opacity-70">Happy Parents</p></div>
-                    <div class="rounded-2xl p-3 md:p-4 bg-[var(--color-card-bg)]/60 border border-[var(--color-primary)]/10 hover-lift"><p class="text-2xl md:text-3xl font-extrabold text-[var(--color-primary)]">1M+</p><p class="text-[10px] md:text-xs uppercase opacity-70">Meals Served</p></div>
-                    <div class="rounded-2xl p-3 md:p-4 bg-[var(--color-card-bg)]/60 border border-[var(--color-primary)]/10 hover-lift"><p class="text-2xl md:text-3xl font-extrabold text-[var(--color-primary)]">4.9★</p><p class="text-[10px] md:text-xs uppercase opacity-70">Avg. Rating</p></div>
+                <div class="grid grid-cols-3 gap-3 md:gap-4 text-center px-4 md:px-6 pb-6 md:pb-8 stats-row countup-start">
+                    <div class="stat-bubble">
+                        <div class="stat-icon"><i data-lucide="users"></i></div>
+                        <p class="stat-number" data-count="50000">0</p>
+                        <p class="stat-label">Happy Parents</p>
+                    </div>
+                    <div class="stat-bubble">
+                        <div class="stat-icon"><i data-lucide="utensils"></i></div>
+                        <p class="stat-number" data-count="1000000">0</p>
+                        <p class="stat-label">Meals Served</p>
+                    </div>
+                    <div class="stat-bubble">
+                        <div class="stat-icon"><i data-lucide="star"></i></div>
+                        <p class="stat-number" data-count="4.9">0</p>
+                        <p class="stat-label">Avg. Rating</p>
+                    </div>
                 </div>
             </section>
 
             
             
-            <section class="relative rounded-3xl p-6 md:p-10 bg-[var(--color-card-bg)] border border-[var(--color-primary)]/10 overflow-hidden">
-                <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-                    <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-[var(--color-primary)]/10 blur-3xl"></div>
-                    <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full bg-[var(--color-secondary)]/10 blur-3xl"></div>
-                </div>
-
-                <div class="text-center relative z-10 mb-6 md:mb-8">
-                    <h2 class="text-3xl md:text-4xl font-extrabold">Loved by Parents Everywhere</h2>
-                    <p class="text-sm md:text-base opacity-80 mt-2">Real stories from our community</p>
-                </div>
-
-                <div class="relative z-10">
-                    <div id="testimonials-carousel" class="overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none -mx-2 px-2 select-none" tabindex="0" aria-roledescription="carousel" aria-label="Testimonials">
-                        <div id="testimonials-track" class="flex gap-4 md:gap-6 items-stretch">
-                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <img src="https://placehold.co/64x64/B0E0E6/3D3B40?text=S" alt="Sarah J avatar" class="w-12 h-12 rounded-full">
-                                    <div>
-                                        <p class="font-semibold">Sarah J.</p>
-                                        <p class="text-xs text-gray-500">Mom of Leo</p>
+            <section class="testimonials-section">
+                <div class="background-gradients" aria-hidden="true"></div>
+            
+                <div class="content-wrapper">
+                    <header class="text-center">
+                        <h2 class="title">Loved by Parents Everywhere</h2>
+                        <p class="subtitle">Real stories from our community</p>
+                    </header>
+            
+                    <div class="carousel-container">
+                        <div id="testimonials-carousel" class="testimonials-carousel" tabindex="0" aria-roledescription="carousel" aria-label="Testimonials">
+                            <div id="testimonials-track" class="carousel-track">
+                                <article class="testimonial-card">
+                                    <div class="testimonial-meta">
+                                        <img src="https://placehold.co/64x64/B0E0E6/3D3B40?text=S" alt="Sarah J avatar" class="avatar">
+                                        <div>
+                                            <p class="name">Sarah J.</p>
+                                            <p class="role">Mom of Leo</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <p class="text-sm md:text-base">“My picky eater absolutely loves the Apple & Spinach puree! It's a relief to find healthy food he enjoys.”</p>
-                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
-                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
-                                </div>
-                            </article>
-                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <img src="https://placehold.co/64x64/FFC0CB/3D3B40?text=M" alt="Mike R avatar" class="w-12 h-12 rounded-full">
-                                    <div>
-                                        <p class="font-semibold">Mike R.</p>
-                                        <p class="text-xs text-gray-500">Dad of Chloe</p>
+                                    <p class="quote">“My picky eater absolutely loves the Apple & Spinach puree! It's a relief to find healthy food he enjoys.”</p>
+                                    <div class="rating" aria-label="5 out of 5 stars">
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
                                     </div>
-                                </div>
-                                <p class="text-sm md:text-base">“The quality is fantastic and the delivery is always on time. Munchkins Delights is a lifesaver for busy parents.”</p>
-                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
-                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
-                                </div>
-                            </article>
-                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <img src="https://placehold.co/64x64/98FB98/3D3B40?text=E" alt="Emily T avatar" class="w-12 h-12 rounded-full">
-                                    <div>
-                                        <p class="font-semibold">Emily T.</p>
-                                        <p class="text-xs text-gray-500">Mom of twins</p>
+                                </article>
+            
+                                <article class="testimonial-card">
+                                    <div class="testimonial-meta">
+                                        <img src="https://placehold.co/64x64/FFC0CB/3D3B40?text=M" alt="Mike R avatar" class="avatar">
+                                        <div>
+                                            <p class="name">Mike R.</p>
+                                            <p class="role">Dad of Chloe</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <p class="text-sm md:text-base">“I trust Munchkins Delights completely. The ingredients are clean and my baby is thriving. Highly recommend!”</p>
-                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
-                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
-                                </div>
-                            </article>
-                            <article class="testimonial-card min-w-[85%] sm:min-w-[60%] md:min-w-[42%] lg:min-w-[34%] snap-center bg-[var(--color-card-bg)] p-6 rounded-2xl shadow-lg border border-[var(--color-primary)]/10 transition-all">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <img src="https://placehold.co/64x64/FDE68A/3D3B40?text=A" alt="Ava K avatar" class="w-12 h-12 rounded-full">
-                                    <div>
-                                        <p class="font-semibold">Ava K.</p>
-                                        <p class="text-xs text-gray-500">Mom of Max</p>
+                                    <p class="quote">“The quality is fantastic and the delivery is always on time. Munchkins Delights is a lifesaver for busy parents.”</p>
+                                    <div class="rating" aria-label="5 out of 5 stars">
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
                                     </div>
-                                </div>
-                                <p class="text-sm md:text-base">“We love the flavors and the transparency. Our toddler asks for Munchkins Delights by name!”</p>
-                                <div class="mt-4 flex items-center gap-1 text-amber-400" aria-label="5 out of 5 stars">
-                                    <i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i>
-                                </div>
-                            </article>
+                                </article>
+            
+                                <article class="testimonial-card">
+                                    <div class="testimonial-meta">
+                                        <img src="https://placehold.co/64x64/98FB98/3D3B40?text=E" alt="Emily T avatar" class="avatar">
+                                        <div>
+                                            <p class="name">Emily T.</p>
+                                            <p class="role">Mom of twins</p>
+                                        </div>
+                                    </div>
+                                    <p class="quote">“I trust Munchkins Delights completely. The ingredients are clean and my baby is thriving. Highly recommend!”</p>
+                                    <div class="rating" aria-label="5 out of 5 stars">
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                        <i data-lucide="star"></i>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="relative mt-4 flex items-center justify-center gap-3">
-                        <button id="testimonials-prev-ovl" class="p-2 md:p-3 rounded-full bg-[var(--color-card-bg)]/80 backdrop-blur border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10 shadow-sm" aria-label="Previous testimonial"><i data-lucide="chevron-left"></i></button>
-                        <div id="testimonials-dots" class="flex items-center gap-2"></div>
-                        <button id="testimonials-next-ovl" class="p-2 md:p-3 rounded-full bg-[var(--color-card-bg)]/80 backdrop-blur border border-[var(--color-primary)]/30 hover:bg-[var(--color-primary)]/10 shadow-sm" aria-label="Next testimonial"><i data-lucide="chevron-right"></i></button>
+            
+                        <div class="carousel-navigation">
+                            <button id="testimonials-prev-ovl" class="nav-button" aria-label="Previous testimonial">
+                                <i data-lucide="chevron-left"></i>
+                            </button>
+                            <div id="testimonials-dots" class="dots-container"></div>
+                            <button id="testimonials-next-ovl" class="nav-button" aria-label="Next testimonial">
+                                <i data-lucide="chevron-right"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -371,45 +435,52 @@
     <template id="shop-template">
         <div class="flex flex-col md:flex-row gap-8">
             <aside class="md:w-1/4">
-                <h2 class="text-2xl font-bold mb-6">Filters</h2>
-                <div class="space-y-6">
-                    <div>
-                        <h3 class="font-semibold mb-2">Age Group</h3>
-                        <select id="age-filter" class="w-full p-2 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]/60">
-                            <option value="all">All Ages</option>
-                            <option value="6m+">6m+</option>
-                            <option value="8m+">8m+</option>
-                            <option value="12m+">12m+</option>
-                        </select>
+                <div class="glass-card rounded-2xl p-5 md:p-6">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2"><i data-lucide="sliders"></i> Filters</h2>
+                    <div class="space-y-5">
+                        <div>
+                            <h3 class="font-semibold mb-2">Age Group</h3>
+                            <select id="age-filter" class="w-full p-2 rounded-lg border border-[var(--color-primary)]/20 bg-[var(--color-card-bg)] focus:ring-2 focus:ring-[var(--color-primary)]/40">
+                                <option value="all">All Ages</option>
+                                <option value="6m+">6m+</option>
+                                <option value="8m+">8m+</option>
+                                <option value="12m+">12m+</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold mb-2">Category</h3>
+                            <select id="category-filter" class="w-full p-2 rounded-lg border border-[var(--color-primary)]/20 bg-[var(--color-card-bg)] focus:ring-2 focus:ring-[var(--color-primary)]/40">
+                                <option value="all">All Categories</option>
+                                <option value="Purees">Purees</option>
+                                <option value="Snacks">Snacks</option>
+                                <option value="Cereals">Cereals</option>
+                                <option value="Drinks">Drinks</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <h3 class="font-semibold">Price Range</h3>
+                                <span class="text-xs opacity-80">Up to ₹<span id="price-value">0</span></span>
+                            </div>
+                            <input type="range" id="price-filter" min="0" max="10" value="10" class="w-full">
+                        </div>
+                        <div class="relative">
+                            <h3 class="font-semibold mb-2">Search</h3>
+                            <input type="text" id="search-bar" placeholder="Search for products..." class="w-full p-2 pl-10 rounded-lg border border-[var(--color-primary)]/20 bg-[var(--color-card-bg)] focus:ring-2 focus:ring-[var(--color-primary)]/40">
+                            <i data-lucide="search" class="absolute left-3 top-10 w-5 h-5 text-gray-400"></i>
+                        </div>
+                        <button id="reset-filters-btn" class="w-full bg-[var(--color-secondary)] text-white py-2.5 rounded-lg font-semibold hover:opacity-90 btn-primary-animated">Reset Filters</button>
                     </div>
-                    <div>
-                        <h3 class="font-semibold mb-2">Category</h3>
-                        <select id="category-filter" class="w-full p-2 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]/60">
-                            <option value="all">All Categories</option>
-                            <option value="Purees">Purees</option>
-                            <option value="Snacks">Snacks</option>
-                            <option value="Cereals">Cereals</option>
-                            <option value="Drinks">Drinks</option>
-                        </select>
-                    </div>
-                    <div>
-                        <h3 class="font-semibold mb-2">Price Range</h3>
-                        <input type="range" id="price-filter" min="0" max="10" value="10" class="w-full">
-                        <span class="text-sm">Up to $<span id="price-value">10</span></span>
-                    </div>
-                     <div class="relative">
-                        <h3 class="font-semibold mb-2">Search</h3>
-                        <input type="text" id="search-bar" placeholder="Search for products..." class="w-full p-2 pl-10 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]/60">
-                        <i data-lucide="search" class="absolute left-3 top-10 w-5 h-5 text-gray-400"></i>
-                    </div>
-                    <button id="reset-filters-btn" class="w-full bg-[var(--color-secondary)] text-white py-2 rounded-lg font-semibold hover:opacity-90">Reset Filters</button>
                 </div>
             </aside>
             <main class="md:w-3/4">
-                <h1 class="text-4xl font-bold mb-6">Our Products</h1>
-                <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+                <div class="flex items-center justify-between mb-4 md:mb-6">
+                    <h1 class="text-3xl md:text-4xl font-bold">Our Products</h1>
+                    <div class="text-sm opacity-80"><span id="products-count">0</span> items</div>
+                </div>
+                <div id="products-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 stagger reveal">
                     </div>
-                 <div id="no-products-message" class="hidden text-center py-16">
+                <div id="no-products-message" class="hidden text-center py-16">
                     <p class="text-xl">No products found matching your criteria. 😢</p>
                 </div>
             </main>
@@ -417,142 +488,215 @@
     </template>
 
     <template id="product-detail-template">
-        <div class="flex flex-col lg:flex-row gap-12">
-            <div class="lg:w-1/2">
-                <img id="product-image" src="" alt="Product Image" class="w-full rounded-2xl shadow-lg mb-4">
-                 </div>
-            <div class="lg:w-1/2">
-                <h1 id="product-name" class="text-4xl font-bold mb-4"></h1>
-                <p id="product-price" class="text-3xl text-[var(--color-primary)] font-semibold mb-6"></p>
-                <p id="product-description" class="mb-6"></p>
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="flex items-center border rounded-lg">
-                        <button class="px-4 py-2" onclick="this.nextElementSibling.stepDown()">-</button>
-                        <input id="product-quantity" type="number" value="1" min="1" class="w-16 text-center border-none bg-transparent focus:ring-0">
-                        <button class="px-4 py-2" onclick="this.previousElementSibling.stepUp()">+</button>
+        <div class="grid lg:grid-cols-2 gap-10 md:gap-16 items-start">
+            <div class="product-gallery-container relative reveal-left">
+                <img id="product-image" src="" alt="Product Image" class="main-product-image">
+                <div id="product-age-badge" class="product-badge age-badge"></div>
+                <div id="product-tag-badge" class="product-badge tag-badge"></div>
+                </div>
+    
+            <div class="product-details-container reveal-right">
+                <h1 id="product-name" class="product-title-lg"></h1>
+                <p id="product-short-description" class="product-tagline"></p>
+    
+                <div class="flex items-end justify-between my-4 md:my-6">
+                    <div class="product-rating-stars" id="product-rating-stars"></div>
+                    <p id="product-price" class="product-price-lg"></p>
+                </div>
+    
+                <div class="add-to-cart-block">
+                    <div class="quantity-selector-container">
+                        <button class="quantity-btn" onclick="this.nextElementSibling.stepDown()">-</button>
+                        <input id="product-quantity" type="number" value="1" min="1" class="quantity-input">
+                        <button class="quantity-btn" onclick="this.previousElementSibling.stepUp()">+</button>
                     </div>
-                    <button id="add-to-cart-btn" class="bg-[var(--color-primary)] text-white flex-grow py-3 px-6 rounded-lg font-bold text-lg hover:opacity-90 transition-transform hover:scale-105 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[var(--color-primary)]/60">
+                    <button id="add-to-cart-btn" class="add-to-cart-btn">
                         <i data-lucide="shopping-cart" class="w-5 h-5"></i> Add to Cart
                     </button>
                 </div>
-
-                <div>
-                    <details class="border-b pb-2 mb-2">
-                        <summary class="font-semibold cursor-pointer">Nutritional Information</summary>
-                        <div id="product-nutrition" class="text-sm p-4 rounded-lg mt-2 bg-[var(--color-background)]/60 text-[var(--color-text)] border border-[var(--color-primary)]/10"></div>
+    
+                <div class="accordion-container mt-8 space-y-4">
+                    <details open>
+                        <summary class="accordion-summary">
+                            <span class="font-semibold">Description</span>
+                            <i data-lucide="chevron-down" class="accordion-icon"></i>
+                        </summary>
+                        <div id="product-description" class="accordion-content"></div>
                     </details>
-                    <details class="border-b pb-2 mb-2">
-                        <summary class="font-semibold cursor-pointer">Ingredients</summary>
-                         <div id="product-ingredients" class="text-sm p-4 rounded-lg mt-2 bg-[var(--color-background)]/60 text-[var(--color-text)] border border-[var(--color-primary)]/10"></div>
+    
+                    <details>
+                        <summary class="accordion-summary">
+                            <span class="font-semibold">Nutritional Information</span>
+                            <i data-lucide="chevron-down" class="accordion-icon"></i>
+                        </summary>
+                        <div id="product-nutrition" class="accordion-content"></div>
                     </details>
+    
+                    <details>
+                        <summary class="accordion-summary">
+                            <span class="font-semibold">Ingredients</span>
+                            <i data-lucide="chevron-down" class="accordion-icon"></i>
+                        </summary>
+                        <div id="product-ingredients" class="accordion-content"></div>
+                    </details>
+                </div>
+    
+                <div class="mt-8 pt-6 border-t border-[var(--color-primary)]/10">
+                    <h3 class="text-xl font-bold mb-3">Why Choose Munchkins Delights?</h3>
+                    <ul class="space-y-2 text-sm opacity-90">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="text-[var(--color-secondary)]"></i> Certified Organic & Non-GMO</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="text-[var(--color-secondary)]"></i> No Added Sugars, Salts, or Preservatives</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="text-[var(--color-secondary)]"></i> Developed with Pediatric Nutritionists</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </template>
     
     <template id="cart-template">
-        <h1 class="text-4xl font-bold mb-8">Your Cart</h1>
-        <div id="cart-container" class="flex flex-col lg:flex-row gap-8">
-            </div>
+        <h1 class="text-4xl font-bold mb-8 text-center md:text-left">Your Cart</h1>
+        <div id="cart-container" class="grid lg:grid-cols-3 gap-8 md:gap-12">
+            <div id="cart-items-container" class="lg:col-span-2 space-y-4 md:space-y-6">
+                </div>
+            <div id="cart-summary-container" class="lg:col-span-1">
+                </div>
+        </div>
     </template>
     
     <template id="about-template">
-        <div class="text-center">
-            <h1 class="text-5xl font-bold mb-4">Our Story</h1>
-            <p class="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">From our kitchen to yours, with love.</p>
-        </div>
-        <div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
-             <div class="order-2 md:order-1">
-                <h2 class="text-3xl font-bold mb-4">How It Started</h2>
-                <p class="mb-4">Munchkins Delights was born from a simple desire: to provide our own children with the most nutritious, delicious, and pure food possible. As new parents, we found ourselves navigating the confusing world of baby food, often disappointed by the long ingredient lists and hidden sugars in store-bought options.</p>
-                <p>So, we started making our own. We spent countless hours in our home kitchen, steaming, blending, and tasting, using only fresh, organic fruits and vegetables. The result? Happy, healthy babies with very yummy tummies. We knew we had to share this goodness with other families, and Munchkins Delights was born.</p>
-            </div>
-            <div class="order-1 md:order-2">
-                <img src="https://placehold.co/600x400/FFFFE0/3D3B40?text=Our+Kitchen" class="rounded-2xl shadow-lg">
-            </div>
-        </div>
-         <div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <img src="https://placehold.co/600x400/98FB98/3D3B40?text=Healthy+Food" class="rounded-2xl shadow-lg">
-            </div>
-            <div>
-                <h2 class="text-3xl font-bold mb-4">Our Promise</h2>
-                <ul class="space-y-4 list-disc list-inside">
-                    <li><strong>100% Organic:</strong> We only use certified organic ingredients, free from pesticides and GMOs.</li>
-                    <li><strong>No Nasties:</strong> Absolutely no added sugars, salts, preservatives, or artificial flavors. Just pure goodness.</li>
-                    <li><strong>Chef-Crafted Recipes:</strong> Developed with pediatric nutritionists to ensure every bite is packed with essential nutrients.</li>
-                    <li><strong>Sustainable & Kind:</strong> We use recyclable packaging and partner with local farms whenever possible.</li>
-                </ul>
-            </div>
-        </div>
-    </template>
+        <div class="space-y-16">
+            <section class="relative rounded-3xl p-6 md:p-16 overflow-hidden gradient-border reveal">
+                <div class="absolute inset-0 -z-10">
+                    <div class="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[var(--color-primary)]/15 blur-3xl"></div>
+                    <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[var(--color-secondary)]/15 blur-3xl"></div>
+                </div>
+                <div class="text-center">
+                    <h1 class="text-3xl md:text-6xl font-extrabold leading-tight mb-3 md:mb-4">Our Story: From a Small Kitchen in Gadhinglaj to Your Door</h1>
+                    <p class="text-base md:text-lg opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto">Nourishing the next generation with pure, wholesome food is our promise. Our journey began in a humble kitchen with a simple, powerful idea.</p>
+                </div>
+            </section>
     
-    <template id="blog-template">
-        <div class="text-center">
-            <h1 class="text-5xl font-bold mb-4">The Munchkins Delights Blog</h1>
-            <p class="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">Tips, tricks, and tasty tales for modern parents.</p>
+            <section class="mt-16 reveal">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <h2 class="text-3xl font-bold mb-4">How Munchkins Delights Began</h2>
+                        <p class="mb-4 text-base opacity-90">Munchkins Delights was born from a simple desire: to provide our own children with the most nutritious, delicious, and pure food possible. As parents in Gadhinglaj, we were disappointed by the long ingredient lists and hidden sugars in store-bought baby food. This led us to start making our own from fresh, locally-sourced produce. Our kitchen became a lab of love, blending the wisdom of our grandmothers' recipes with modern nutritional science.</p>
+                        <p class="opacity-90">Word quickly spread among local families, and we realized this passion could become a purpose. Our mission is to share the authentic, homemade goodness of Gadhinglaj with families everywhere, ensuring every bite is a step towards a healthier future for your little one.</p>
+                    </div>
+                    <div class="order-1 md:order-2 relative group rounded-2xl overflow-hidden shadow-lg hover-lift">
+                        <img src="https://images.unsplash.com/photo-1543781285-b1a9f1430030?q=80&w=2070&auto=format&fit=crop" alt="A parent feeding their baby" class="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <p class="text-white text-sm">Our journey started with a spoonful of love.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="mt-16 reveal premium-smiles soft-moving-gradient">
+                <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-center p-6 md:p-12">
+                    <div>
+                        <h2 class="text-2xl md:text-5xl font-extrabold leading-tight mb-3 md:mb-5 headline-accent">Our Four Pillars of Purity</h2>
+                        <p class="text-sm md:text-base opacity-90 mb-5 md:mb-7 tagline-soft">Every Munchkins Delights product is built on a foundation of trust, quality, and a commitment to your child's well-being.</p>
+                        <div class="flex flex-wrap gap-2.5 md:gap-3">
+                            <span class="badge-premium"><span class="badge-icon"><i data-lucide="sparkles"></i></span><span class="badge-label">Certified Clean</span></span>
+                            <span class="badge-premium"><span class="badge-icon"><i data-lucide="heart-pulse"></i></span><span class="badge-label">Pediatrician Approved</span></span>
+                            <span class="badge-premium"><span class="badge-icon"><i data-lucide="sprout"></i></span><span class="badge-label">Farm-to-Spoon</span></span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 md:gap-6">
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon leaf"><i data-lucide="leaf"></i></div>
+                            <h3 class="pebble-title">Locally Sourced</h3>
+                            <p class="pebble-text">We get our freshest ingredients directly from farms in and around Gadhinglaj.</p>
+                        </div>
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon chef"><i data-lucide="chef-hat"></i></div>
+                            <h3 class="pebble-title">No Additives</h3>
+                            <p class="pebble-text">Absolutely no added sugars, salts, or preservatives. Just pure, whole food.</p>
+                        </div>
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon tree"><i data-lucide="tree-pine"></i></div>
+                            <h3 class="pebble-title">Minimal Processing</h3>
+                            <p class="pebble-text">Our gentle cooking methods preserve the natural nutrients and flavors.</p>
+                        </div>
+                        <div class="pebble-card feature-card heartbeat">
+                            <div class="pebble-icon truck"><i data-lucide="truck"></i></div>
+                            <h3 class="pebble-title">Made with Love</h3>
+                            <p class="pebble-text">Each batch is crafted with the same care we would give our own children.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="mt-16 reveal">
+                <div class="bg-[var(--color-card-bg)] rounded-2xl shadow-sm border border-[var(--color-primary)]/10 p-8 md:p-12 text-center">
+                    <h2 class="text-3xl font-bold mb-4">Meet the Founder</h2>
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                        <img src="https://placehold.co/150x150/FFC0CB/3D3B40?text=A.P" class="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover border-4 border-[var(--color-primary)]/50 shadow-md">
+                        <div>
+                            <p class="font-bold text-lg md:text-xl">Akash Patil, Founder</p>
+                            <p class="text-sm md:text-base opacity-80 max-w-2xl mx-auto mt-2">"As a father, I understand the challenge of finding trustworthy baby food. I started Munchkins Delights to solve this problem for my family and yours. We are committed to making a difference, one healthy bite at a time."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-[var(--color-card-bg)] rounded-2xl shadow-md overflow-hidden group">
-                <img src="https://placehold.co/400x250/B0E0E6/3D3B40?text=Nutrition+Tips" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
-                <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">Nutrition</p>
-                    <h3 class="text-xl font-bold mb-4">Introducing Solids: A Beginner's Guide</h3>
-                    <p class="text-sm mb-4">Feeling overwhelmed? Here's our simple guide to starting your baby's food journey.</p>
-                    <a href="#" class="font-semibold text-[var(--color-primary)] hover:underline">Read More &rarr;</a>
-                </div>
-            </div>
-             <div class="bg-[var(--color-card-bg)] rounded-2xl shadow-md overflow-hidden group">
-                <img src="https://placehold.co/400x250/FFC0CB/3D3B40?text=Parenting+Hacks" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
-                <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">Parenting</p>
-                    <h3 class="text-xl font-bold mb-4">5 Mealtime Hacks for Picky Eaters</h3>
-                    <p class="text-sm mb-4">Turn stressful meals into fun family time with these tried-and-true tips from fellow parents.</p>
-                    <a href="#" class="font-semibold text-[var(--color-primary)] hover:underline">Read More &rarr;</a>
-                </div>
-            </div>
-             <div class="bg-[var(--color-card-bg)] rounded-2xl shadow-md overflow-hidden group">
-                <img src="https://placehold.co/400x250/98FB98/3D3B40?text=Recipes" class="w-full h-48 object-cover group-hover:scale-105 transition-transform">
-                <div class="p-6">
-                    <p class="text-sm text-gray-500 mb-2">DIY Recipes</p>
-                    <h3 class="text-xl font-bold mb-4">DIY Baby Snacks: Healthy & Easy</h3>
-                    <p class="text-sm mb-4">Want to try making your own? Here are three simple recipes you can whip up in minutes.</p>
-                    <a href="#" class="font-semibold text-[var(--color-primary)] hover:underline">Read More &rarr;</a>
-                </div>
-            </div>
-        </div>
-    </template>
+    </template> 
+    
+    
     
     <template id="contact-template">
-         <div class="text-center">
-            <h1 class="text-5xl font-bold mb-4">Get In Touch</h1>
-            <p class="text-xl max-w-3xl mx-auto text-gray-600 dark:text-gray-300">We'd love to hear from you! Send us a message and we'll get back to you.</p>
-        </div>
-        <div class="mt-16 grid md:grid-cols-2 gap-12">
-            <form class="space-y-6">
-                <div>
-                    <label for="name" class="block font-semibold mb-1">Name</label>
-                    <input type="text" id="name" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]">
+        <div class="space-y-16">
+            <div class="text-center reveal">
+                <h1 class="text-3xl md:text-6xl font-extrabold mb-4">Let's Connect</h1>
+                <p class="text-base md:text-lg max-w-3xl mx-auto opacity-90">Whether you have a question about our products, an issue with your order, or just want to say hello, we're here for you.</p>
+            </div>
+    
+            <div class="grid lg:grid-cols-2 gap-12 mt-16 reveal">
+                <div class="p-6 md:p-10 rounded-3xl bg-[var(--color-card-bg)] shadow-md border border-[var(--color-primary)]/10">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6">Send Us a Message</h2>
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block font-semibold mb-1">Name</label>
+                            <input type="text" id="name" class="w-full p-3 rounded-lg bg-[var(--color-background)] text-[var(--color-text)] border border-[var(--color-primary)]/20 focus:ring-2 focus:ring-[var(--color-primary)]">
+                        </div>
+                        <div>
+                            <label for="email" class="block font-semibold mb-1">Email</label>
+                            <input type="email" id="email" class="w-full p-3 rounded-lg bg-[var(--color-background)] text-[var(--color-text)] border border-[var(--color-primary)]/20 focus:ring-2 focus:ring-[var(--color-primary)]">
+                        </div>
+                        <div>
+                            <label for="message" class="block font-semibold mb-1">Message</label>
+                            <textarea id="message" rows="5" class="w-full p-3 rounded-lg bg-[var(--color-background)] text-[var(--color-text)] border border-[var(--color-primary)]/20 focus:ring-2 focus:ring-[var(--color-primary)]"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-[var(--color-primary)] text-white py-3 rounded-full font-bold text-lg hover:opacity-90 transition-opacity btn-primary-animated">Send Message</button>
+                    </form>
                 </div>
-                 <div>
-                    <label for="email" class="block font-semibold mb-1">Email</label>
-                    <input type="email" id="email" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]">
-                </div>
-                 <div>
-                    <label for="message" class="block font-semibold mb-1">Message</label>
-                    <textarea id="message" rows="5" class="w-full p-3 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-2 focus:ring-[var(--color-primary)]"></textarea>
-                </div>
-                <button type="submit" class="w-full bg-[var(--color-primary)] text-white py-3 rounded-lg font-bold text-lg hover:bg-opacity-80">Send Message</button>
-            </form>
-            <div class="bg-[var(--color-secondary)]/30 p-8 rounded-2xl">
-                 <h3 class="text-2xl font-bold mb-4">Contact Info</h3>
-                 <ul class="space-y-4">
-                      <li class="flex items-center gap-4"><i data-lucide="mail"></i> hello@Munchkins Delights.com</li>
-                      <li class="flex items-center gap-4"><i data-lucide="phone"></i> (123) 456-7890</li>
-                      <li class="flex items-center gap-4"><i data-lucide="map-pin"></i> 123 Yum Street, Foodie Town, USA</li>
-                 </ul>
-                 <div class="mt-8 h-64 bg-gray-300 rounded-lg">
-                    <p class="text-center pt-24 text-gray-500">Map would go here</p>
+                
+                <div class="p-6 md:p-10 rounded-3xl glass-card border border-[var(--color-primary)]/10 text-center flex flex-col items-center justify-center">
+                    <div class="w-full h-full flex flex-col items-center justify-center space-y-8">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-2">Our Details</h2>
+                        <ul class="space-y-4 md:space-y-6 text-base md:text-lg">
+                            <li class="flex items-center gap-4 justify-center">
+                                <a href="mailto:hello@MunchkinsDelights.com" class="flex items-center gap-3 hover:text-[var(--color-primary)] transition-colors">
+                                    <i data-lucide="mail" class="text-[var(--color-primary)]"></i> 
+                                    <span>hello@MunchkinsDelights.com</span>
+                                </a>
+                            </li>
+                            <li class="flex items-center gap-4 justify-center">
+                                <a href="tel:+919096332327" class="flex items-center gap-3 hover:text-[var(--color-primary)] transition-colors">
+                                    <i data-lucide="phone" class="text-[var(--color-primary)]"></i> 
+                                    <span>(123) 456-7890</span>
+                                </a>
+                            </li>
+                            <li class="flex items-center gap-4 justify-center">
+                                <i data-lucide="map-pin" class="text-[var(--color-primary)]"></i> 
+                                <span>Gala No 5, New Bazar, Gadhinglaj, India</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-8 pt-8 border-t border-[var(--color-primary)]/10 w-full text-sm opacity-80">
+                        <p>We typically respond within 24-48 business hours.</p>
+                    </div>
                 </div>
             </div>
         </div>
